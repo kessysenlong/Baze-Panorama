@@ -22,6 +22,18 @@ Route :: get('/users/{id}', function($id){ //you can parse more than one value i
 
 Route :: get('/', 'PagesController@index'); //routing through controller class @ the index function
 Route :: get('/about', 'PagesController@about');
-Route :: get('/services', 'PagesController@services');
+Route :: get('/services', 'PagesController@contact');
+Route :: post ('/search', 'SearchController@index');
 
 Route::resource('posts', 'PostsController');
+Auth::routes();
+
+
+//DocumentViewer Library
+Route::any('ViewerJS/{all?}', function(){
+
+    return View::make('ViewerJS.index');
+});
+
+
+Route::get('/dashboard', 'DashboardController@index');
