@@ -6,6 +6,7 @@
     <h1>Create Post</h1>
     <!--using lavarel collectives for form helpers, file uploads MUST have enctype set to multipart -->
         {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        
             <div class="form-group">
                 {{Form::label('title', 'Title')}}
                 {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Volume/Issue'])}}
@@ -15,6 +16,11 @@
                 {{Form::label('issn', 'ISSN')}}
                 {{Form::text('issn', '', ['class' => 'form-control', 'placeholder' => 'ISSN'])}}
             </div>
+
+            {{-- <div class="form-group">
+                    {{Form::label('category', 'Category')}}
+                    {{Form::text('issn', '', ['class' => 'form-control', 'placeholder' => 'ISSN'])}}
+                </div> --}}
 
             <div class="form-group">
                 {{Form::label('body', 'Summary')}}

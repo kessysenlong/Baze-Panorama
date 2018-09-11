@@ -4,9 +4,9 @@
 
 <div class="container">
     <div class="card" style="padding-bottom:3rem">
-        <div class="float-left card-header"><h3>Search Results</h3></div>
+        <div class="float-left card-header bg-dark text-white"><h3>Search Results</h3></div>
             @foreach($posts as $post)
-                <div class="alert alert-dark card-body" style="margin-top:10px;margin-left:20px; margin-right:20px">
+                <div class="card-body" style="margin-top:10px;margin-left:20px; margin-right:20px">
                     
                             {{-- <div style="padding-right:10px"> <!-- class="col-md-4 col-sm-4"-->
                                 <img style ="max-height: 120px; max-width:100px" src="/storage/cover_images/{{$post->cover_image}}">
@@ -21,6 +21,7 @@
                             <a class="btn btn-success float-right" href="/storage/cover_images/{{$post->cover_image}}" download="{{$post->cover_image}}">
                             Download
                             </a>
+                            <hr>
                     </div>
                 </div>
             @endforeach 

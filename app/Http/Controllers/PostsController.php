@@ -28,13 +28,19 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {  
+        $post = new Post;
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-        
- 
-    return view('posts.index')->with('posts', $posts);
-      
-        $posts->appends(Request::query())->render();
+        $postasc = Post::orderBy('created_at', 'asc')->paginate(10);
+        $titleasc = Post::orderBy('title', 'asc')->paginate(10);
+        $titledesc = Post::orderBy('title', 'desc')->paginate(10);
+        $ext = pathinfo($post->cover_image, PATHINFO_EXTENSION);
+        //$ext = \File::extension($post->cover_image);
+        //$ext = Input::file($post->cover_image)->getClientOriginalExtension();
 
+      
+        return view('posts.index', compact('posts', 'ext', 'postasc', 'titleasc', 'titledesc'));
+        
+        $posts->appends(Request::query())->render();
         
     }
        

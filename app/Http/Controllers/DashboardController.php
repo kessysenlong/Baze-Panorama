@@ -32,6 +32,7 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('posts', $user->posts));
         
-       
+        // for posts pagonation
+        $posts->appends(Request::query())->render();
     }
 }

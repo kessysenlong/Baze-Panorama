@@ -1,112 +1,97 @@
 @extends('layouts.app')
 @section('content')
 
-     
 
 
-<div class="row">
-      <div class=" col-9 float-left">
-            <div class="jumbotron text-center" style="margin-top:10px">
-                  <h1 class="display-3">Baze University Panorama</h1>
-                    <p>A weekly pictoral magazine that brings major activities of Baze University to members of the community. It’s great to bring gown to town!</p>
-                  </div>
-                  <hr />
-            @if(count($posts) > 0)
-          <div class="card">
-            <div class="card-header">
-                  <h2><strong>Current Issue</strong>: {{$latestpost->title}}</h2>
-                <a>Posted on {{Date('d M, Y', strtotime($latestpost->created_at))}} by {{$latestpost->user->name}}</a>
-            </div>
-            <div class="card-body">
-                <p>{!!str_limit($latestpost->body, 230)!!}</p>
-                    
-                    
-                    <a href="/posts/{{$latestpost->id}}" class="btn btn-success float-right">Go to Post</a>
-              @else
-                    <p>No posts available</p>
-              @endif
-          </div>
-          </div>
-            </div>
-                  
-           
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+<div class="carousel-inner" style="width:100%">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="/storage/slide_images/guy backpack.jpg" alt="First slide" height="550px">
+      <div class="carousel-caption text-white" style=" background:black; opacity:0.5">
+          <h1 style="text-shadow:2px 2px 4px white">Welcome to Baze University Panorama</h1>
+          <a class="btn btn-dark" href="/posts" style="text-align:centre">Go to archive</a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/storage/slide_images/broadcast.jpg" alt="Second slide" height="550px">
+      <div class="carousel-caption text-white" style="background:black; opacity:0.5;">
+        <div style="position:initial">
+          <h1 style="padding-left:5px; padding-right:5px">Editor's Note</h1>
+          <h5 style="padding-left:5px; padding-right:5px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar a leo eu pellentesque. Vivamus dignissim arcu sit amet pharetra lobortis. Integer congue lacinia lorem, ac auctor elit</h5>
+        </div>
+        </div>
+    </div>
+    {{-- <div class="carousel-item">
+      <img class="d-block w-100" src="/storage/cover_images/chairs.jpg" alt="Third slide" height="550px">
+    </div> --}}
+</div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
 
-      <div class="col-3 float-right">
-            <div class="card-header"  style="width: 18rem;">
-                  <img class="card-img-top" src="/storage/cover_images/news.png"  alt="news image">
-                  <div class="card-body">
-                              <h5 class="card-title" style="horizontal-align:centre">Latest News</h5>
-                              {{-- {{ date('d M, Y') }} --}}
-                              <p class="card-text">Baze University wins National Debate Competition and grand prize of $10,000.</p>
-                  <hr>
-                  <h5 class="card-title">Editor's Welcome</h5>
-                              <p class="card-text">Welcome readers</p>
-                  <hr>
-                        <ul class="list-group">
-                              <li class="list-group-item"><a href=""> Other Publications</a></li>
-                              <li class="list-group-item"><a href=""> Authors </a></li>
-                              
-                        </ul>
-                        <br>
-                        <a style="text-align:center"> Ordo Tech © {{ date('Y') }} </a>
-                  </div> 
-            </div> 
+ <div id="main" class="container" style="margin-top:40px">   
+    {{-- <div class="card" style="margin:auto; max-width:100%; height: 250px; padding:10px; border:3px solid black; text-align:center">
+      <div class="card-body">
+      <p style="font-size:28px; text-shadow:2px 2px 5px black"><strong> Welcome To Baze University Panorama</strong></p>
+      
+      <p style="font-size:16px">A weekly pictoral magazine that brings major activities of Baze University to members of the community.</p>
+        
+      <p style="font-size:16px">It’s great to bring gown to town!</p> 
+        
+      <a class="btn btn-dark" href="/posts" style="text-align:centre">Go to archive</a>
+
+    </div>
+  </div> --}}
+
+  <div class="row" style="margin-top:30px; margin-left:5px; margin-right:5px">
+
+    <div class="col-sm mr-sm-4" style="border-top:3px solid #33CC00; padding-top:5px">
+      <h3>Current Issue</h3>
+      <h5><strong>{{$latestpost->title}}</strong></h5>
+      <small> Posted on {{Date('d M, Y', strtotime($latestpost->created_at))}} by {{$latestpost->user->name}}</small>
+      <p>{!!str_limit($latestpost->body, 230)!!}</p>
+      <a href="/posts/{{$latestpost->id}}" class="btn btn-dark float-left">Go to Post</a>
+    </div>
+
+    <div class="col-sm mr-sm-4" style="border-top:3px solid #0000FF; padding-top:5px">
+        <h3>Editor's Note</h3>
+        <h5><strong>Dr. Jamila Shuara</strong></h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar a leo eu pellentesque. Vivamus dignissim arcu sit amet pharetra lobortis. Integer congue lacinia lorem, ac auctor elit</p>
       </div>
 
+      <div class="col-sm mr-sm-4" style="border-top:3px solid #FF00FF; padding-top:5px">
+          <h3>Journals</h3>
+          <h5><strong>and other publications</strong></h5>
+          <p></p>
+        </div>
 
-</div>
-             
-
-
-      {{-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-              <li data-target="#myCarousel" data-slide-to="1"></li>
-              <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-                <div class="container">
-                  <div class="carousel-caption text-left">
-                    <h1>Example headline.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-                <div class="container">
-                  <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-                <div class="container">
-                  <div class="carousel-caption text-right">
-                    <h1>One more for good measure.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                  </div>
-                </div>
-              </div>
+      
+            <div class=" col-sm card-header text-white" style="padding-top:5px;background:black; text-align:center; height:100%; vertical-align:middle; font-size:18px; box-shadow:4px 4px 5px grey; border-radius:15px">
+            <strong>
+            <p style="padding-top:15px">We currently have a total of</p>
+            
+            <p class="text-primary" style="font-size:35px">{{$postcount}}</p> 
+            <p>posts since January 2018.</p>
+            </strong>
             </div>
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div> --}}
-    
+          
+
+  </div>
+</div>
 
 
 @endsection 
+
+
     

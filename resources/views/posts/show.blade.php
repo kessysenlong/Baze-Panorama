@@ -5,26 +5,30 @@
 @section('content')
 
 <div class="card bg-light">
-    <div class="card-header">
-            <h2 >Panorama: {{$post->title}}</h2>
-    </div>
+    
     <div class="card-body">
             <table>
                 <tbody>
                     <tr>
                         @if($post->cover_image != 'noimage.jpg')
+                            @if($extension = '.pdf')
                         <td rowspan="2" style="padding-right:10px">
                             <iframe frameborder="1" src="/storage/cover_images/{{$post->cover_image}}" width="700" height="600" allowfullscreen webkitallowfullscreen></iframe>
                         </td>
                         @endif
+                        @endif
 
-                        <td style="vertical-align:top">
-                                
+                        <td style="vertical-align:top; width:100%">
+                                <div class="card-header bg-dark text-white" style="margin-bottom:10px">
+                                        <h4>Panorama: {{$post->title}}</h4>
+                                </div>
+
                                 @if($post->issn != null)
-                                    <p>ISSN: {!!$post->issn!!}</p>
-                                @endif
+                                <p><strong>ISSN: </strong>{!!$post->issn!!}</p>
+                            @endif
+                                
                             
-                                <hr>
+                               
                                 {!!$post->body!!} 
                         </td>
                     </tr>
@@ -52,7 +56,7 @@
          @endif
         <a href="/posts" class="btn btn-dark float-right" style="padding-right:10px">Go Back</a>
         @if($post->cover_image != 'noimage.jpg')
-            <a href="/storage/cover_images/{{$post->cover_image}}" download="{{$post->cover_image}}" class="btn btn-success" style="padding-right:10px">Download</a>
+            <a href="/storage/cover_images/{{$post->cover_image}}" download="{{$post->cover_image}}" class="btn btn-success" style="padding-right:10px"><i class="fas fa-download"></i> Download</a>
         @endif
     </div>
 </div>

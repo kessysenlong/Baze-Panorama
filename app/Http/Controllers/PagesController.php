@@ -5,6 +5,7 @@ namespace App\Http\Controllers; //auto names the controller
 use Illuminate\Http\Request; //adds the request library to handle requests
 use App\Post; 
 use DB;
+use Mail;
 
 class PagesController extends Controller //extends core controller, all created cpntrollers should extend core
 {
@@ -12,10 +13,11 @@ class PagesController extends Controller //extends core controller, all created 
         $title = 'Baze Panorama!';
         $latestpost = Post::latest()->first();
         $posts = Post::get();
+        $postcount = Post::count();
        
         
        
-        return view ('pages.index', compact('title', 'latestpost', 'posts')); 
+        return view ('pages.index', compact('title', 'latestpost', 'posts', 'postcount')); 
         //return view ('pages.index') -> with('title', $title); //this can be achieved using either this method or the one above
     }
     public function about(){
@@ -23,14 +25,14 @@ class PagesController extends Controller //extends core controller, all created 
         return view('pages.about')-> with('title', $title);;
     }
     public function contact (){
-        $data = array(
-            'title' => 'Contact Us',
-            'services' => ['Email', 'Address', 'Directories']
-        );
-        return view ('pages.contact')-> with ($data); //return page with appended array data
+        $title ='Contact Us';
+
+        //return view ('pages.contact')-> with( 'title', $title);//return page with appended array data
+        return view ('pages.contact');
     }
     public function search(){
         $title = 'Search Results';
         return view('pages.search')-> with('title', $title);;
     }
+    
 }

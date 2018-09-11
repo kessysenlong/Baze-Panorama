@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Baze Publications') }}</title>
 
     
     <!-- Fonts -->
@@ -17,21 +17,24 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
 
 
 </head>
 <body>
     <div id="app">
-        
         @include('inc.navbar')
-        <main class="py-4 px-4 bg-light"> <!--<div class="container" style="margin-top:10px">-->
+        <main class="py-4 px-4 bg-white"> <!---->
             @include('inc.messages')
             @yield('content')
-        </main>
+        </main> 
     </div>
-
+   
     <!--scripts-->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/sidenav.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
