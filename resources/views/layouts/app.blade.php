@@ -26,11 +26,13 @@
 <body>
     <div id="app">
         @include('inc.navbar')
-        <main class="py-4 px-4 bg-white"> <!---->
+        <main class="py-4 px-4 bg-white">
             @include('inc.messages')
             @yield('content')
-        </main> 
+        </main>
+        {{-- @include('inc.navfooter')  --}}
     </div>
+    
    
     <!--scripts-->
     <script src="{{ asset('js/app.js') }}"></script>

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Panorama'),
+    'name' => env('APP_NAME', 'Baze Publications'),
 
     /*
     |--------------------------------------------------------------------------

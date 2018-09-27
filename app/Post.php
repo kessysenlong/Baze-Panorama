@@ -29,7 +29,7 @@ class Post extends Model
     //search query
     public function scopeSearch($query, $s){
         return $query->where('title', 'like', '%' .$s. '%')
-                    ->orWhere('body', 'like', '%' .$s. '%')
+                    // ->orWhere('body', 'like', '%' .$s. '%')
                     ->orWhere('issn', 'like', '%' .$s. '%');
     }
 }

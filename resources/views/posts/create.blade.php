@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="container">
     <h1>Create Post</h1>
     <!--using lavarel collectives for form helpers, file uploads MUST have enctype set to multipart -->
@@ -17,10 +18,10 @@
                 {{Form::text('issn', '', ['class' => 'form-control', 'placeholder' => 'ISSN'])}}
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group">
                     {{Form::label('category', 'Category')}}
-                    {{Form::text('issn', '', ['class' => 'form-control', 'placeholder' => 'ISSN'])}}
-                </div> --}}
+                    {{Form::select('category', array('Baze Panorama'=>'Panorama', 'Baze Focus'=>'Focus', 'Others'=>'Others'), 'Baze Panorama', ['class' => 'form-control'])}}
+                </div>
 
             <div class="form-group">
                 {{Form::label('body', 'Summary')}}
@@ -35,7 +36,6 @@
             {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
             <a href="/posts" class="btn btn-dark" style="padding-right:10px">Cancel</a>
         {!! Form::close() !!}
-        
 
 </div>
 

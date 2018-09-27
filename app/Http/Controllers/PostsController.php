@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage; //lib for public folder storage
 use App\Post; //fetch post
 use DB; //to not use eloquent but sql query
 use Input;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -26,19 +27,43 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {  
-        $post = new Post;
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-        $postasc = Post::orderBy('created_at', 'asc')->paginate(10);
-        $titleasc = Post::orderBy('title', 'asc')->paginate(10);
-        $titledesc = Post::orderBy('title', 'desc')->paginate(10);
-        $ext = pathinfo($post->cover_image, PATHINFO_EXTENSION);
-        //$ext = \File::extension($post->cover_image);
-        //$ext = Input::file($post->cover_image)->getClientOriginalExtension();
+    public function index(Request $request){
+        
+        $posts = new Post;
+        // $usert = User::find('id');
+        // $userx = $posts->user_id;
+        // $user = User::where('usert', $userx);
+        //$user = User::find($id)->posts;
+        
+        if(request()->hasFile('cover_image')){
+            //check for file extension
+            $ext = $request->file('cover_image')->getClientOriginalExtension();
+        }
+
+        if(request()->has('category')) {
+            //filter results
+            $posts = $posts::where('category', request('category'));
+           
+        }
+
+        if(request()->has('sorttime')){
+            //sort results by time
+            $posts = $posts::orderBy('created_at', request('sorttime'));
+        }
+
+        if(request()->has('sorttitle')){
+            //sort results by title
+            $posts = $posts::orderBy('title', request('sorttitle'));
+        }
+
+        $posts = $posts->orderBy('created_at', 'desc')->paginate(10)->appends([
+            'category' => request('category'),
+            'sorttime' => request('sorttime'),
+            'sorttitle' => request('sorttitle')
+        ]);
 
       
-        return view('posts.index', compact('posts', 'ext', 'postasc', 'titleasc', 'titledesc'));
+        return view('posts.index', compact('posts', 'ext'));
         
         $posts->appends(Request::query())->render();
         
@@ -66,9 +91,10 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'nullable',
             'issn' => 'nullable',
-            'cover_image' => 'nullable|max:9999'
+            'category' => 'required',
+            'cover_image' => 'nullable|max:20000000'
            
         ]);
         //handle file upload
@@ -91,6 +117,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->issn = $request->input('issn');
+        $post->category = $request->input('category');
         $post->user_id = auth()->user()->id; //gets current user id and saves it to post id field
         $post->cover_image = $fileNameToStore;
         $post->save();
@@ -139,8 +166,9 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required',
-            'issn' => 'nullable'
+            'body' => 'nullable',
+            'issn' => 'nullable',
+            'category' => 'required'
         ]);
 
         if($request->hasFile('cover_image')){
@@ -160,6 +188,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->category = $request->input('category');
         //test to see if user actually uploaded file
         if($request->hasFile('cover_image')){
             $post->cover_image = $fileNameToStore;

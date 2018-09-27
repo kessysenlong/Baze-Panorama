@@ -10,7 +10,7 @@ use Mail;
 class PagesController extends Controller //extends core controller, all created cpntrollers should extend core
 {
     public function index(){
-        $title = 'Baze Panorama!';
+        $title = 'Baze publications';
         $latestpost = Post::latest()->first();
         $posts = Post::get();
         $postcount = Post::count();

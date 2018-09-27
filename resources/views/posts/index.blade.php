@@ -1,78 +1,84 @@
 @extends('layouts.app')
 @section('content')
 
-
-    <div class="container">
-        <div class="card" style="padding-bottom:3rem">
-            <div class="card-header bg-dark" style="margin-bottom:10px"> 
-                <div class="float-left text-white">
-                    <h3>Journal Archive  <i class="fas fa-book-open"></i></h3>
+<div class="container">
+    <div class="row" style="padding-bottom:5px" >
+        <div class="col-md-6">
+                Filter by publication:
+                <a href="?category=Baze Panorama">Baze Panorama</a> | 
+                <a href="?category=Focus">Baze Focus</a> | 
+                <a href="?category=Others">Others</a> | 
+                <a href="/posts">Reset</a>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="btn-group float-right">
+                <button type="button" class="btn btn-primary">Sort by</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('posts.index', ['category' => request('category'), 'sorttime' => 'desc']) }}">Newest</a>
+                    <a class="dropdown-item" href="{{ route('posts.index', ['category' => request('category'), 'sorttime' => 'asc']) }}">Oldest</a>
+                    <a class="dropdown-item" href="{{ route('posts.index', ['category' => request('category'), 'sorttitle' => 'desc']) }}">Title desc</a>
+                    <a class="dropdown-item" href="{{ route('posts.index', ['category' => request('category'), 'sorttitle' => 'asc']) }}">Title asc</a>
                 </div>
-            
-                <div class="btn-group float-right">
-                    <button type="button" class="btn btn-secondary">Sort by</button>
-                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['post' => 'posts']) }}">Newest</a>
-                    <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['post' => 'postasc']) }}">Oldest</a>
-                        <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['post' => 'titledesc']) }}">Title DESC</a>
-                        <a class="dropdown-item" href="{{ Request::fullUrlWithQuery(['post' => 'titleasc']) }}">Title ASC</a>
-                    </div>
-                  </div>
             </div>
-                @if(count($posts) > 0) 
-                    @foreach($posts as $post)
-                        <div class="card-body" style="margin-left:20px; margin-right:20px;">
-                         <div class="row">
-                             {{-- post icons --}}
-                                    <div class="col-auto">
-                                        
-                                        @if($ext == "pdf")
-                                            <h1><i class="fas fa-file-pdf"></i></h1>
-                                            
-                                            @elseif($ext == 'jpg')
-                                                <h1><i class="fas fa-image"></i></h1>
-                                           
-                                            @elseif($ext == 'docx')
-                                                <h1><i class="fas fa-file-alt"></i></h1>
-                                                
-                                            @elseif($ext == 'mp4')
-                                                <h1><i class="fas fa-video"></i></h1>
-                                                
-                                            @elseif($ext == 'mp3')
-                                                <h1><i class="fas fa-file-audio"></i></h1>
-                                        @endif
-                                       
-                                    </div>
-
-                                    {{-- post list --}}
-                                    <div class="col-sm"> <!-- class="col-md-8 col-sm-8"-->
-                                    <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                                    @if($post->issn != null)
-                                        <small>ISSN: {{$post->issn}}</small><br>
-                                    @endif
-                                    <small><strong>Posted on</strong> {{Date('d M, Y', strtotime($post->created_at))}} <strong>By </strong>{{$post->user->name}}</small>
-                                    
-                                    <a class="btn btn-success float-right" href="/storage/cover_images/{{$post->cover_image}}" download="{{$post->cover_image}}">
-                                        <i class="fas fa-download"></i>
-                                        Download
-                                    </a>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    @endforeach 
-                
-                @else
-        <p>No posts found.</p>
-             @endif
-
-             <div style="text-align:center">{{ $posts->links() }}</div>
         </div>
     </div>
-</div>
 
+ 
+
+
+    @if(count($posts) > 0) 
+
+        <table class="table table-striped border-bottom">
+            <thead>
+                <tr>
+                    <td>File</td>      
+                    <td>Post Title</td>
+                    <td style="text-align:center">Publication</td>
+                    <td style="text-align:center">ISSN</td>
+                    <td style="text-align:center">Posted On</td>
+                    <td style="text-align:center">By</td>
+                </tr>
+            </thead>
+               
+            <tbody>
+                @foreach($posts as $post)
+                <tr>
+                    <td>
+                        @if($post->ext == '.pdf')
+                        <i class="fas fa-file-pdf"></i>
+                        @elseif($post->ext == 'jpeg')
+                        <i class="fas fa-image"></i>
+                        @endif
+                       {{-- {{$post->ext}} --}}
+                    </td>
+                    <td><h5><a href="/posts/{{$post->id}}">{{$post->title}}</a></h5></td>
+                    <td style="text-align:center">{{$post->category}}</td>
+                    <td style="text-align:center">
+                        @if($post->issn != null)
+                            {{$post->issn}}
+                        @else
+                        <h5>-</h5>
+                        @endif
+                    </td>
+                    <td style="text-align:center">{{Date('d M, Y', strtotime($post->created_at))}}</td>
+                <td style="text-align:center">{{$post->user['name']}}</td>
+                </tr>
+                @endforeach  
+            </tbody>
+        </table>
+    @else
+        <h4>There are no posts at the moment.</h4> 
+    @endif
+
+    <div class="row text-center">
+        {{ $posts->links()}}
+    </div>
+        
+        
+
+    </div>
 @endsection

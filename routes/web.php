@@ -37,5 +37,6 @@ Route::any('ViewerJS/{all?}', function(){
     return View::make('ViewerJS.index');
 });
 
-
-Route::get('/dashboard', 'DashboardController@index');
+Route::resource('dashboard', 'DashboardController');
+// Route::get('/dashboard', 'DashboardController@index');
+// Route::post('/dashboard', 'DashboardController@destroy');

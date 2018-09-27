@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('issn');
+            $table->string('category');
             $table->mediumText('body');
             $table->timestamps();
         });

@@ -1,6 +1,6 @@
 <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black"> 
+<nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color:white"> 
         <div class="row" style="width:100%">
 
     {{-- side navbar --}}
@@ -21,22 +21,31 @@
                                 <div class="collapse" id="collapseExample">
                                       <div style="padding-left:10px">
                                             <a href="/posts" style="font-size:16px">All</a>
-                                            <a href="#" style="font-size:16px">Baze Panorama</a>
-                                            <a href="#" style="font-size:16px">Baze Focus</a>
-                                            <a href="#" style="font-size:16px">Others</a>                  
+                                            <a href="/posts?category=Baze Panorama" style="font-size:16px">Baze Panorama</a>
+                                            <a href="/posts?category=Focus" style="font-size:16px">Baze Focus</a>
+                                            <a href="/posts?category=Others" style="font-size:16px">Others</a>                  
                                     </div>
                                 </div>
                     
                             <a href="/services">Contact Us</a>
                             <a href="https://bazeuniversity.edu.ng/news/news-all.php">News</a>
-                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                            
                     </div>
                     
-                    <div class="text-white">
+                    <div class="text-black">
                         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                     </div>
                     
                     <script src="{{ asset('js/sidenav.js') }}"></script>
+                    <script>
+                            function disableBtn() {
+                                document.getElementById("regBtn").hidden = true;
+                            }
+                            
+                            function enableBtn() {
+                                document.getElementById("regBtn").hidden = false;
+                            }
+                            </script>
             </li>
         </ul>
     </div>
@@ -83,9 +92,10 @@
                                             @csrf
                                         <input class="form-control mr-sm-2 is-valid" type="text" name="s" value="{{ isset($s) ?  $s : ''}}" placeholder="Search Journals" aria-label="Search">
                                             
-                                        <button class="btn btn-outline-success my-2 my-sm-0 float-right" type="submit"><i class="fas fa-search"></i> Search</button>
-                                            </form>
-                                        </a> 
+                                        <button class="btn btn-outline-success form-control my-2 my-sm-0 float-right" type="submit"><i class="fas fa-search"></i> Search</button>
+                                        
+                                        </form>
+                                    </a> 
                                     
         
                                     {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -98,14 +108,18 @@
                                 <a class="nav-link" href="http://library.bazeuniversity.edu.ng/"> Main Library</a>    
                             </li>
 
+                            <li class="nav-item mr-sm-2 ml-sm-2">
+                                <a class="nav-link" id="regBtn" hidden="true" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item mr-sm-2 ml-sm-2">
                                     <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i>  {{ __('Login') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" hidden="true" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" id="register" hidden="true" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li> --}}
                         @else
                             <li class="nav-item dropdown mr-sm-2 ml-sm-2">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
