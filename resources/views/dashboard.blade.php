@@ -3,7 +3,7 @@
 @extends('layouts.app')
 @section('content')
 
-Haha
+
 <div class="card-header" style="text-align:center; font-size:20px; border-radius: 15px 15px 0 0; background:white; border:1px solid #ccc">Welcome to your dashboard, {{ Auth::user()->name }}</div>
 <div style="margin-bottom:10px; height:90%">
     {{-- tab links --}}
