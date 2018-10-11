@@ -10,13 +10,11 @@
                 <a href="?category=Others">Others</a> | 
                 <a href="/posts">Reset</a>
         </div>
-        
+
         <div class="col-md-6">
             <div class="btn-group float-right">
                 <button type="button" class="btn btn-primary">Sort by</button>
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  
-                </button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('posts.index', ['category' => request('category'), 'sorttime' => 'desc']) }}">Newest</a>
                     <a class="dropdown-item" href="{{ route('posts.index', ['category' => request('category'), 'sorttime' => 'asc']) }}">Oldest</a>
@@ -28,7 +26,6 @@
     </div>
 
  
-
 
     @if(count($posts) > 0) 
 
@@ -48,11 +45,12 @@
                 @foreach($posts as $post)
                 <tr>
                     <td>
-                        @if($post->ext == '.pdf')
+                        {{$post->cover_image}}
+                        {{-- @if($post->ext == '.pdf')
                         <i class="fas fa-file-pdf"></i>
                         @elseif($post->ext == 'jpeg')
                         <i class="fas fa-image"></i>
-                        @endif
+                        @endif --}}
                        {{-- {{$post->ext}} --}}
                     </td>
                     <td><h5><a href="/posts/{{$post->id}}">{{$post->title}}</a></h5></td>

@@ -17,20 +17,22 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css?family=Advent+Pro|Bad+Script|Chau+Philomene+One|Galada|Nova+Square|Trirong|Ultra|UnifrakturMaguntia" rel="stylesheet">
+    
 
 
 </head>
 <body>
     <div id="app">
         @include('inc.navbar')
-        <main class="py-4 px-4 bg-white">
+        <main class="py-3 bg-white" style="padding-bottom:20px">
             @include('inc.messages')
             @yield('content')
-        </main>
-        {{-- @include('inc.navfooter')  --}}
+            {{-- @include('inc.navfooter') --}}
+        </main> 
+        
     </div>
     
    

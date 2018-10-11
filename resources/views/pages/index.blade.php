@@ -1,87 +1,129 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="row" style="height:30%; width:100%">
+{{-- <style>
+  /* If the browser window is smaller than 600px, make the columns stack on top of each other */
+@media only screen and (max-width: 600px) {
+    .col { 
+        display: block;
+        width: 100%;
+    }
+}
+
+</style> --}}
+
+
+<div class="row">
   {{-- image slideshow --}}
   <div class="col-sm">
       <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
       <div class="carousel-inner" style="width:100%">
+
           <div class="carousel-item active">
-            <img class="d-block w-100" src="/storage/slide_images/bpc.jpg" alt="First slide" height="550px">
-            {{-- <div class="carousel-caption text-white">
-                <h1 style="text-shadow:2px 2px 4px white">Welcome to Baze University Panorama</h1>
-                <a class="btn btn-dark" href="/posts" style="text-align:centre">Go to archive</a>
-            </div> --}}
+            <img class="d-block w-100" src="/storage/bg_images/bookshelf.jpg" alt="First slide" height="550px" style="opacity:0.7">
+            <div class="carousel-caption text-white text-left">
+                <h1 style="font-size:60pt">
+                  <strong>
+                  WELCOME TO THE BAZE <br>
+                  PUBLICATION PORTAL
+                </strong>
+                </h1>
+                <h5>
+                  Explore our expansive offerings ranging from project thesis to our weekly panorama updates on the university.
+                </h5>
+                <a class="btn btn-dark" href="/posts">Apply to publish with us</a>
+            </div>
           </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="/storage/slide_images/broadcast.jpg" alt="Second slide" height="550px">
-            <div class="carousel-caption text-white" style="background:black; opacity:0.5;">
-              <div style="position:initial">
-                <h1 style="padding-left:5px; padding-right:5px">Editor's Note</h1>
-                <h5 style="padding-left:5px; padding-right:5px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar a leo eu pellentesque. Vivamus dignissim arcu sit amet pharetra lobortis. Integer congue lacinia lorem, ac auctor elit</h5>
-              </div>
-              </div>
-          </div>
+         
       </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          {{-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
           <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-          </a>
+          </a> --}}
       </div>
-  </div>
+  </div> 
 
 </div>
 
 
 {{-- Info container --}}
- <div class="container" style="margin-top:40px">   
-  <div class="row" style="margin-top:30px; margin-left:5px; margin-right:5px">
 
-    <div class="col-sm mr-sm-4" style="border-top:7px solid #33CC00; padding-top:5px;text-align:justify">
-      <h2 style="padding-bottom:5px; padding-top:5px"><strong>Current Issue</strong></h2>
-      <img class="card-img-top" src="/storage/slide_images/books1.jpg" alt="current issue" style="height:180px;width:100%">
-      <h5>{{$latestpost->title}}</h5>
-      <small> Posted on {{Date('d M, Y', strtotime($latestpost->created_at))}} by {{$latestpost->user->name}}</small>
-      <p>{!!str_limit($latestpost->body, 230)!!}</p>
-      <a href="/posts/{{$latestpost->id}}" class="btn btn-dark float-left">Go to Post</a>
-     </div>
+ <div class="container" style="margin-top:40px">
+   {{-- latest posts row --}}
+   <h3>LATEST PUBLICATIONS</h3>   
+  <div class="row" style="margin-top:30px">
+
+    <div class="col-sm mr-sm-4" style="border:2px solid black">
+  
+      <h2 style="padding-bottom:5px; padding-top:5px; text-transform:uppercase; font-weight:bold">{{$latestpost->title}}</h2>
+      <h5 style="font-variant:small-caps; color:slategrey">Category: {{$latestpost->category}}</h5>
+      <p>Posted on {{Date('d M, Y', strtotime($latestpost->created_at))}} | {{$latestpost->user->name}}</p> 
+      {{-- <p>{!!str_limit($latestpost->body, 230)!!}</p> --}}
+      <p><a href="/posts/{{$latestpost->id}}" class="btn btn-dark float-left">READ</a></p> 
+  
+    </div>
     
-    <div class="col-sm mr-sm-4" style="border-top:7px solid #0000FF; padding-top:5px;text-align:justify">
+    <div class="col-sm mr-sm-4" style="border:2px solid black">
         <h2 style="padding-bottom:5px; padding-top:5px"><strong>Editor's Note</strong></h2>
-        <img class="card-img-top" src="/storage/bg_images/macbook.jpg" alt="editor's note" style="height:180px;width:100%">
         <h5>Dr. Jamila Shuara</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar a leo eu pellentesque. Vivamus dignissim arcu sit amet pharetra lobortis. Integer congue lacinia lorem, ac auctor elit</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar a leo eu pellentesque. Vivamus dignissim arcu sit amet pharetra lobortis. Integer congue lacinia lorem, ac auctor elit</p> 
       </div>
 
-      <div class="col-sm mr-sm-4" style="border-top:7px solid #FF00FF; padding-top:5px;text-align:justify">
+      <div class="col-sm mr-sm-4" style="border:2px solid black">
           <h2 style="padding-bottom:5px; padding-top:5px"><strong>Journals</strong></h2>
-          <img class="card-img-top" src="/storage/slide_images/library.jpg" alt="Journals" style="height:180px;width:100%">
           <h5>and other publications</h5>
           <p></p>
-        </div>
+      </div>
+  </div>
+  <div class="text-right" style="font-size:15px; padding-top:10px; padding-bottom:25px"><a href="" style="color:black">BROWSE OUR PUBLICATIONS   <i class="fas fa-arrow-right"></i></a></div>
 
+</div>
+
+ {{-- categories row --}}
+ <div class="row text-center" style="padding-top:10px;">
+
+    <div class="col-sm-4 text-white" style="background:black; height:300px; border-bottom:2px solid black">
       
-            {{-- <div class=" col-sm card-header text-white" style="padding-top:5px;background:black; text-align:center; height:100%; vertical-align:middle; font-size:18px; box-shadow:4px 4px 5px grey; border-radius:15px">
-            <strong>
-            <p style="padding-top:15px">We currently have a total of</p>
-            
-            <p class="text-primary" style="font-size:35px">{{$postcount}}</p> 
-            <p>posts since January 2018.</p>
-            </strong>
-            </div> --}}
-          
+      <h2 style="padding-top:25%">POST CATEGORIES</h2>
+    
+    </div>
+
+    <div class="col-sm" style="height:initial; border:1px solid black;">
+
+      <div class="row" style="height:150px">
+          <div class="col-sm" style="border:1px solid black;">
+              <h4 style="padding-top:20%"><a href="/posts?category=Baze Panorama" style="color:black">PANORAMA</a></h4>
+          </div>
+          <div class="col-sm" style="border:1px solid black">
+              <h4 style="padding-top:20%">FOCUS</h4>
+          </div>
+          <div class="col-sm" style="border:1px solid black">
+              <h4 style="padding-top:20%">SRC</h4>
+          </div>
+      </div>
+
+      <div class="row" style="height:150px">
+          <div class="col-sm" style="border:1px solid black">
+              <h4 style="padding-top:20%">THESIS</h4>
+          </div>
+          <div class="col-sm" style="border:1px solid black">
+              <h4 style="padding-top:20%">ARTICLES</h4>
+          </div>
+          <div class="col-sm" style="border:1px solid black">
+              <h4 style="padding-top:20%">ALUMNI</h4>
+          </div>
+      </div>
+
+    </div>
 
   </div>
-</div>
 
 
 @endsection 

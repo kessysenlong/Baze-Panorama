@@ -8,23 +8,15 @@ use App\inbox;
 use App\Post;
 use DB;
 
-class DashboardController extends Controller
+class AdminDashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    //
     public function __construct() //this function blocks off dashboard from unauthenticated users
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user_id = auth()->user()->id;
@@ -37,13 +29,12 @@ class DashboardController extends Controller
         $outbox  = inbox::where('user_id', auth()->user()->id)->get();
        
 
-        return view('dashboard', compact('posts', 'postadmin', $user->posts, 'usercount', 'userlist', 'inbox', 'outbox'));
+        return view('dashboardAdmin', compact('posts', 'postadmin', $user->posts, 'usercount', 'userlist', 'inbox', 'outbox'));
 
         // for posts pagination
         $posts->appends(Request::query())->render();
     }
-    
-    //REDIRECT TO NEW MESSAGE EDITOR/MODAL
+
     public function create()
     {
 
@@ -75,7 +66,7 @@ class DashboardController extends Controller
         $inbox->from = auth()->user()->name; //gets current user id and saves it to from field        
         $inbox->save();
 
-        return redirect('/dashboard')->with('success', 'Message sent');
+        return redirect('/dashboardAdmin')->with('success', 'Message sent');
     }
 
     public function reply($id){
@@ -95,7 +86,7 @@ class DashboardController extends Controller
         $user = User::find($id);
         //preventing logged in user from deleting themselves
         if(auth()->user()->id == $user->id){
-            return redirect('/dashboard')->with('error', 'Suicidal? Why remove yourself?');
+            return redirect('/dashboardAdmin')->with('error', 'Suicidal? Why remove yourself?');
         }
         //allowing logged in user (Admin) delete other users
         if(auth()->user()->id != $user->id){
@@ -104,7 +95,7 @@ class DashboardController extends Controller
         }
 
         //$user->delete();
-        return redirect('/dashboard')->with('success', 'User Removed');
+        return redirect('/dashboardAdmin')->with('success', 'User Removed');
     }
 
     public function destroyMsg($id){
@@ -114,8 +105,8 @@ class DashboardController extends Controller
         $inbox->delete();
         
          
-        return redirect('/dashboard')->with('success', 'Message Deleted');
+        return redirect('/dashboardAdmin')->with('success', 'Message Deleted');
     }
 
-   
+
 }

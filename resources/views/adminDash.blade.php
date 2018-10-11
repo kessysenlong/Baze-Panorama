@@ -3,9 +3,8 @@
 @section('content')
 
 
-<h3 class="text-center"> Welcome to your dashboard, {{ Auth::user()->name }} </h3>
-
-<div style="margin-up:10px">
+<div class="card-header" style="text-align:center; font-size:20px; border-radius: 15px 15px 0 0; background:white; border:1px solid #ccc">Welcome to your dashboard, {{ Auth::user()->name }}</div>
+    <div style="margin-bottom:10px; height:90%">
     {{-- tab links --}}
     <div class="tab" style="height:100%">
     <button class="tablinks" onclick="openCity(event, 'dash')" style="font-size:20px"><i class="fas fa-tachometer-alt"></i>   Dashboard</button>
@@ -121,65 +120,9 @@
                             {!!Form::open(['action' => ['DashboardController@destroy', $msg->id], 'method' => 'POST'])!!}
                                 {{Form::hidden('_method', 'DELETE')}}
                                 {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{$msg->id}}">
-                                        Reply
-                                </button>
                             {!!Form::close()!!}
 
-                            <!-- REPLY MODAL -->
-                            <div class="modal fade" id="{{$msg->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">Reply to {{$msg->from}}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                      
-                                              {!! Form::open(['action' => 'DashboardController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                                  
-                                              <div class="form-group">
-                                                  {{Form::label('subject', 'Subject')}}
-                                                  {{Form::text('subject', $msg->subject, ['class' => 'form-control'])}}
-                                              </div>
-                                  
-                                              <div class="form-group" hidden="false">
-                                                  {{Form::label('from', 'From:')}}
-                                                  {{Form::text('from', $msg->to, ['class' => 'form-control'])}}
-                                              </div>
-
-                                              <div class="form-group" hidden="false">
-                                                    {{Form::label('reply_id', 'Reply ID:')}}
-                                                    {{Form::text('reply_id', $msg->id, ['class' => 'form-control'])}}
-                                                </div>
-                                  
-                                              <div class="form-group" hidden="false">
-                                                      {{Form::label('to', 'Recepient:')}}
-                                                      {{Form::text('to', $msg->from, ['class' => 'form-control'])}}
-                                                  </div>
-                                  
-                                              <div class="form-group">
-                                                  {{Form::label('message', 'Message')}}
-                                                  <!--using id ckeditor to implement text editor in text area-->
-                                                  {{Form::textarea('message', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Type your message'])}}
-                                              </div>
-                          
-                                              <div class="modal-footer">
-                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                      <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Reply</button>
-                                              </div>
-                          
-                                              {!! Form::close() !!}
-                          
-                                              </div>
-            
-                                          </div>
-                                      </div>
-                                  </div>
-
+                            <button type="submit" class="btn btn-secondary">Reply</button>
                         </div>
                     </div>
                 </div>
@@ -197,54 +140,7 @@
 
 {{-- Sent/Outbox tab --}}
     <div id="sent" class="tabcontent">
-            @if(count ($outbox) > 0)
-        
-            @foreach($outbox as $sent)
-            <div class="col-sm-md">
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$sent->id}}" aria-expanded="false" aria-controls="collapseOne">
-                        <div class="row" style="width:100%">
-                            <div class="col-sm-3 float-left">
-                                From: {{$sent->from}}
-                            </div>
 
-                            <div class="col-sm-6 float-left">
-                                <h4>{{$sent->subject}}</h4>
-                            </div>
-
-                            <div class="col-sm-3 float-right">
-                                    <small>Sent at:</small> {{Date('d M, Y', strtotime($sent->created_at))}}
-                            </div>
-                        </div>
-                        </button>
-                        </h5>
-                    </div>
-            
-                    <div id="{{$sent->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            {{$sent->message}}
-                        </div>
-
-                        <div class="card-footer">
-                           
-                                {!!Form::open(['action' => ['DashboardController@destroy', $sent->id], 'method' => 'POST'])!!}
-                                    {{Form::hidden('_method', 'DELETE')}}
-                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                {!!Form::close()!!}
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            @endforeach
-    @else
-        <h3>You have no messages</h3>
-        
-    @endif
         </div>
 
 {{-- contact list tab --}}
@@ -256,12 +152,15 @@
                                   <tr>
                                       <td><strong>Users</strong></td>
                                       <td><strong>Email</strong></td>
-                                      <td></td>                              
+                                      <td></td>
+                                      @if(auth()->user()->email == 'dssd@bazeuniversity.edu.ng')
+                                      <td><strong>Delete User</strong></td>
+                                      @endif
+                                      
                                   </tr>
                                </thead>
   
                             @foreach($userlist as $users)
-                            @if($users->id != auth()->user()->id)
                               <tr>
                               <td>{{$users->name}}</td>
                               <td>{{$users->email}}</td>
@@ -317,14 +216,29 @@
                                             </div>
                                         </div>
                                     </div>
-                              </td>   
+                              </td>
+  
+                                @if(auth()->user()->email == 'dssd@bazeuniversity.edu.ng')
+
+                              <td style="text-align:center">
+                                  {!!Form::open(['action' => ['DashboardController@destroy', $users->id], 'method' => 'POST','style' => 'text-align:center'])!!}
+                                  {{Form::hidden('_method', 'DELETE')}}
+                                  {{Form::submit('Delete', ['class' => 'btn btn-danger',])}}
+                                  {!!Form::close()!!}
+                              </td>
+
+                              @endif
+                              
+                              
                             </tr>
-                            @endif
                             @endforeach
                           </table>
                       </div>
                   
               </div>
+        </div>
+    </div>
+</div>
 
 {{-- account dash --}}
     <div id="account" class="tabcontent" style="padding-left:10px; padding-right:10px;padding-top:5px">
@@ -340,11 +254,29 @@
 
         <br>
         <hr>
+        {{-- admin control for new user registration --}}
+        @if(Auth::user()->email == 'dssd@bazeuniversity.edu.ng')
+            <h3>New user registration</h3>
+            <p>You can enable and disable the link for new user registration here.</p>
+
+            <a onclick="enableBtn()" class="btn btn-primary">Enable Registration</a>
+            <a onclick="disableBtn()" class="btn btn-Info">Disable Registration</a>
+
+        @endif
     </div>
-</div>
 
 {{-- scripts --}}
 <script src="{{ asset('js/dashboardtab.js') }}"></script>
 <script src="{{ asset('js/dashmodal.js') }}"></script>
- 
+<script>
+        function disableBtn() {
+            document.getElementById("regBtn").hidden = true;
+        }
+        
+        function enableBtn() {
+            document.getElementById("regBtn").hidden = false;
+        }
+        </script>
+
+</div>
 @endsection

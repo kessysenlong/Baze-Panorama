@@ -30,14 +30,12 @@ class PostsController extends Controller
     public function index(Request $request){
         
         $posts = new Post;
-        // $usert = User::find('id');
-        // $userx = $posts->user_id;
-        // $user = User::where('usert', $userx);
-        //$user = User::find($id)->posts;
+        // $ext = $request->posts['cover_image']->extension();
+        
         
         if(request()->hasFile('cover_image')){
             //check for file extension
-            $ext = $request->file('cover_image')->getClientOriginalExtension();
+            $ext1 = $request->file('cover_image')->getClientOriginalExtension();           
         }
 
         if(request()->has('category')) {

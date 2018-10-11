@@ -71,9 +71,10 @@ section {
 }
 
 main{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  min-height: 100%;
 }
 
 body {

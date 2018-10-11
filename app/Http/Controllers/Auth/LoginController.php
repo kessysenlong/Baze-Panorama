@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -17,16 +21,36 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/dashboard';
 
+    public function login(Request $request){
+        // dd($request ->all());
+
+        if(Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]))
+        {
+            $user = User::where('email', $request->email)->first();
+
+            if($user->is_admin()){
+
+                //return redirect()->route('dashboardAdmin');
+                return redirect('dashboardAdmin');
+            }
+
+            // return redirect()->route('dashboard');
+            return redirect('dashboard');
+        }
+
+        return redirect()->back();
+    }
     /**
      * Create a new controller instance.
      *

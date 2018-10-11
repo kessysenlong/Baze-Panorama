@@ -24,7 +24,6 @@ Route :: get('/', 'PagesController@index'); //routing through controller class @
 Route :: get('/about', 'PagesController@about');
 Route :: get('/services', 'PagesController@contact');
 
-
 Route :: post ('/search', 'SearchController@index');
 
 Route::resource('posts', 'PostsController');
@@ -37,6 +36,38 @@ Route::any('ViewerJS/{all?}', function(){
     return View::make('ViewerJS.index');
 });
 
-Route::resource('dashboard', 'DashboardController');
-// Route::get('/dashboard', 'DashboardController@index');
-// Route::post('/dashboard', 'DashboardController@destroy');
+// Route::resource('dashboard', 'DashboardController');
+// Route::resource('dashboardAdmin', 'AdminDashboardController');
+
+Route::post('/login/custom', [
+    'uses' => 'Auth\LoginController@login',
+    'as' => 'login.custom'
+]);
+
+Route::get('/dash/custom', [
+    'uses' => 'DashController@dash',
+    'as' => 'dash.custom'
+]);
+
+// Route :: group(['middleware' => 'auth'], function(){
+
+//     Route :: get('/dashboard', function(){
+
+//         return view('dashboard');
+//     })->name('dashboard');
+
+//     Route :: get('/dashboardAdmin', function(){
+
+//         return view('dashboardAdmin');
+//     })->name('dashboardAdmin');
+
+// });
+
+
+Route :: group(['middleware' => 'auth'], function(){
+
+    Route :: resource('dashboard', 'DashboardController');
+
+    Route :: resource('dashboardAdmin', 'AdminDashboardController');
+
+});

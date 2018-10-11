@@ -6,7 +6,7 @@ body {font-family: "Lato", sans-serif;}
     float: left;
     border: 1px solid #ccc;
     background-color: grey;
-    width: 30%;
+    width: 20%;
     height: 100%;
 }
 
@@ -40,7 +40,7 @@ body {font-family: "Lato", sans-serif;}
 .tabcontent {
     float: left;
     border: 1px solid #ccc;
-    width: 70%;
+    width: 80%;
     border-left: none;
     height: 100%;
 }
