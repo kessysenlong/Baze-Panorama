@@ -49,7 +49,7 @@ class LoginController extends Controller
             return redirect('dashboard');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Login failed, please try again');
     }
     /**
      * Create a new controller instance.

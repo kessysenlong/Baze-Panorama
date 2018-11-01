@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\inbox;
+use App\Category;
 use App\Post;
+use App\Application;
 use DB;
 
 class AdminDashboardController extends Controller
@@ -17,7 +20,7 @@ class AdminDashboardController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
@@ -27,9 +30,11 @@ class AdminDashboardController extends Controller
         $userlist = User::orderBy('created_at', 'desc')->get();
         $inbox = inbox::where('to', auth()->user()->id)->get();
         $outbox  = inbox::where('user_id', auth()->user()->id)->get();
-       
+        $applicants = Application::orderBy('created_at', 'DESC')->get();
+        $category = Category::orderBy('name', 'asc')->get();
 
-        return view('dashboardAdmin', compact('posts', 'postadmin', $user->posts, 'usercount', 'userlist', 'inbox', 'outbox'));
+
+        return view('dashboardAdmin', compact('posts', 'postadmin', $user->posts, 'applicants', 'usercount', 'userlist', 'inbox', 'outbox', 'category'));
 
         // for posts pagination
         $posts->appends(Request::query())->render();
@@ -69,15 +74,12 @@ class AdminDashboardController extends Controller
         return redirect('/dashboardAdmin')->with('success', 'Message sent');
     }
 
-    public function reply($id){
+    public function addUser($id){
         
-        $mybox= inbox::where('to', auth()->user()->id)->get();
-    
         
         
     }
 
-    
 
     //DELETE USER FROM DB AND SYSTEM
     public function destroy($id)
@@ -94,18 +96,44 @@ class AdminDashboardController extends Controller
             //User::delete($user->id);
         }
 
-        //$user->delete();
         return redirect('/dashboardAdmin')->with('success', 'User Removed');
     }
 
     public function destroyMsg($id){
-        $inbox = inbox::find($id);
-        $outbox = $inbox;
 
+        $inbox = inbox::find($id);
         $inbox->delete();
-        
          
-        return redirect('/dashboardAdmin')->with('success', 'Message Deleted');
+        return redirect('dashboardAdmin')->with('success', 'Message Deleted');
+    }
+
+    public function changePword(Request $request){
+        
+        $user = auth()->user();
+        
+        $currentPass = $request->input('currentPass');
+        $newPass = $request->input('newPass');
+        $confirmPass = $request->input('confirmPass');
+
+        if(Hash::check($currentPass, $user->password)){
+
+            if($newPass == $confirmPass){
+
+                $user->password = Hash::make ($request->input('newPass'));
+                $user->save();
+
+            return redirect('dash.custom')->with('success', 'Password updated successfully');
+                
+            }
+            else{
+                return redirect('dash.custom')->with('error', 'Your new passwords do not match, try again');
+            }
+
+        }
+
+        else{
+            return redirect('dash.custom')->with('error', 'The password you entered does not match our records');
+        }
     }
 
 

@@ -10,7 +10,7 @@
         
             <div class="form-group">
                 {{Form::label('title', 'Title')}}
-                {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Volume/Issue'])}}
+                {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Volume/Issue', 'required' => 'required'])}}
             </div>
 
             <div class="form-group">
@@ -20,7 +20,13 @@
 
             <div class="form-group">
                     {{Form::label('category', 'Category')}}
-                    {{Form::select('category', array('Baze Panorama'=>'Panorama', 'Baze Focus'=>'Focus', 'Others'=>'Others'), 'Baze Panorama', ['class' => 'form-control'])}}
+                    {{-- {{Form::select('category', array('Baze Panorama'=>'Panorama', 'Baze Focus'=>'Focus', 'Others'=>'Others'), 'Baze Panorama', ['class' => 'form-control'])}} --}}
+                    {!! Form::select('category', $categories,  
+                   
+                    // (['0' => 'Select a Category'] + $categories), 
+                        null, 
+                        ['class' => 'form-control']) !!}
+
                 </div>
 
             <div class="form-group">

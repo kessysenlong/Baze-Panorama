@@ -20,54 +20,71 @@ Route :: get('/users/{id}', function($id){ //you can parse more than one value i
 });
 */
 
-Route :: get('/', 'PagesController@index'); //routing through controller class @ the index function
-Route :: get('/about', 'PagesController@about');
-Route :: get('/services', 'PagesController@contact');
+Route::get('/', 'PagesController@index');
 
-Route :: post ('/search', 'SearchController@index');
+Route::get('/about', 'PagesController@about');
+
+Route::get('/services', 'PagesController@contact');
+
+Route::post ('/search', 'SearchController@index');
 
 Route::resource('posts', 'PostsController');
+
+Route::resource('category', 'CategoryController');
+
+Route::resource('/application', 'ApplicationController');
+
+
+
+// user authentication route
+
 Auth::routes();
 
-
 //DocumentViewer Library
+
 Route::any('ViewerJS/{all?}', function(){
 
     return View::make('ViewerJS.index');
 });
 
-// Route::resource('dashboard', 'DashboardController');
-// Route::resource('dashboardAdmin', 'AdminDashboardController');
+// login redirect to custom page (admin and guest)
 
 Route::post('/login/custom', [
     'uses' => 'Auth\LoginController@login',
     'as' => 'login.custom'
 ]);
 
+// dashboard redirect to custom page (admin and guest)
+
 Route::get('/dash/custom', [
     'uses' => 'DashController@dash',
     'as' => 'dash.custom'
 ]);
 
-// Route :: group(['middleware' => 'auth'], function(){
+// auth route for admin and guest dashboards
 
-//     Route :: get('/dashboard', function(){
+Route::group(['middleware' => 'auth'], function(){
 
-//         return view('dashboard');
-//     })->name('dashboard');
+    Route::resource('dashboard', 'DashboardController');
 
-//     Route :: get('/dashboardAdmin', function(){
-
-//         return view('dashboardAdmin');
-//     })->name('dashboardAdmin');
-
-// });
-
-
-Route :: group(['middleware' => 'auth'], function(){
-
-    Route :: resource('dashboard', 'DashboardController');
-
-    Route :: resource('dashboardAdmin', 'AdminDashboardController');
+    Route::resource('dashboardAdmin', 'AdminDashboardController');
 
 });
+
+// changing admin password
+
+Route::post('dashboardAdmin/change', [
+    'uses' => 'AdminDashboardController@changePword',
+    'as' => 'change'
+]);
+
+Route::post('dashboard/change', [
+    'uses' => 'DashboardController@changePword',
+    'as' => 'change.guest'
+]);
+
+
+
+
+
+

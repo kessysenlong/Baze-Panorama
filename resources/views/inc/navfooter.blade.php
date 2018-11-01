@@ -1,25 +1,23 @@
-      
-        
-        <div class="navbar navbar-expand-lg text-black border-top" style="background:white; padding-top:10px">
+<div class="navbar navbar-expand-lg navbar-dark text-white bg-dark border-top">
             
-        <div class="row" style="width:100%; padding-right:15px; padding-left:15px">
+        <div class="row" style="width:100%; padding-right:15px; padding-left:15px; padding-top:10px">
             <div class="col-sm text-left">
             <strong><h2 style="padding-bottom:10px">QUICK LINKS</h2></strong>
-            <ul class="text-black" style="list-style:none; color:black">
+            <ul class="text-black" style="list-style:none;">
                 <li class="navbar-item">
-                    <h5><a href="" style="color:black">PANORAMA</a></h5>
+                    <h5><a href="" style="color:white">> PANORAMA</a></h5>
                 </li>
 
                 <li class="navbar-item">
-                   <h5><a href="" style="color:black">FOCUS</a></h5> 
+                   <h5><a href="" style="color:white">> FOCUS</a></h5> 
                 </li>
 
                 <li class="navbar-item">
-                   <h5><a href="" style="color:black">CONTACT US</a></h5> 
+                   <h5><a href="" style="color:white">> CONTACT US</a></h5> 
                 </li>
 
                 <li class="navbar-item">
-                    <h5><a href="" style="color:black">BAZE UNIVERSITY</a></h5>
+                    <h5><a href="" style="color:white">> BAZE UNIVERSITY</a></h5>
                 </li>
             </ul>
         </div>
@@ -30,7 +28,7 @@
                             <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Enter your email to sign up for updates" aria-label="subcribe to newsletter" aria-describedby="button-addon2">
                                     <div class="input-group-append">
-                                      <button class="btn btn-dark" type="button" id="button-addon2">SUBSCRIBE</button>
+                                      <button class="btn btn-outline-success" type="button" id="button-addon2">SUBSCRIBE</button>
                                     </div>
                                   </div>
                     </form>

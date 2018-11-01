@@ -8,6 +8,7 @@ use App\Post; //fetch post
 use DB; //to not use eloquent but sql query
 use Input;
 use App\User;
+use App\Category;
 
 class PostsController extends Controller
 {
@@ -30,9 +31,12 @@ class PostsController extends Controller
     public function index(Request $request){
         
         $posts = new Post;
-        // $ext = $request->posts['cover_image']->extension();
+        // $ext = \File::extension($posts->cover_image);
+        // $pst = Post::all()->get(1);
+        // $pxt = pathinfo(storage_path().'/storage/cover_images/'. $pst->cover_image, PATHINFO_EXTENSION);
+                
         
-        
+
         if(request()->hasFile('cover_image')){
             //check for file extension
             $ext1 = $request->file('cover_image')->getClientOriginalExtension();           
@@ -59,9 +63,12 @@ class PostsController extends Controller
             'sorttime' => request('sorttime'),
             'sorttitle' => request('sorttitle')
         ]);
+       
+        
+        // $ext = pathinfo(storage_path().'/storage/cover_images/'. $posts->cover_image, PATHINFO_EXTENSION);
 
       
-        return view('posts.index', compact('posts', 'ext'));
+        return view('posts.index', compact('posts'));
         
         $posts->appends(Request::query())->render();
         
@@ -75,7 +82,11 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        // $categories = Category::orderBy('name', 'asc')->pluck('name');
+        $categories = Category::orderBy('name', 'asc')->pluck('name');
+
+
+        return view('posts.create')->with('categories', $categories);
 
     }
 
@@ -112,6 +123,7 @@ class PostsController extends Controller
         }
         //create post
         $post = new Post;
+
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->issn = $request->input('issn');
@@ -133,7 +145,11 @@ class PostsController extends Controller
     {
         //fetching post id from db
         $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+        Event::fire('posts.view', $post);
+        
+        return View::make('posts.show')->withPost($post);
+
+        // return view('posts.show')->with('post', $post);
     }
 
     /**
@@ -221,5 +237,13 @@ class PostsController extends Controller
         return redirect('/posts')->with('success', 'Post Removed');
     }
 
-    
+    // public function getCategories($id){
+    //     $categories = Category::orderBy('name', 'asc')->get();
+    //     $options = array();
+
+    //     foreach($categories as $category){
+    //         $options += array($category->id => $category->name);
+    //     }
+    //     return view('posts.create')->with($options, 'options')
+    // }
 }

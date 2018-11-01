@@ -3,21 +3,90 @@
 @section('content')
 
 
-<h3 class="text-center"> Welcome to your dashboard, {{ Auth::user()->name }} </h3>
+<h3 class="text-center"> </h3>
 
 <div style="margin-up:10px">
     {{-- tab links --}}
     <div class="tab" style="height:100%">
-    <button class="tablinks" onclick="openCity(event, 'dash')" style="font-size:20px"><i class="fas fa-tachometer-alt"></i>   Dashboard</button>
-    <button class="tablinks" onclick="openCity(event, 'posts')" id="defaultOpen" style="font-size:20px"><i class="fas fa-newspaper"></i>  Your Posts</button>
+    <button class="tablinks text-white" disabled="true" style="font-size:14px; background:#343a40">Welcome to your dashboard, {{ Auth::user()->name }} </button>
+    <button class="tablinks" onclick="openCity(event, 'insight')" id="defaultOpen" style="font-size:20px"><i class="fas fa-chart-line"></i>   Insights</button>
+    <button class="tablinks" onclick="openCity(event, 'posts')"  style="font-size:20px"><i class="fas fa-newspaper"></i>  Your Posts</button>
     <button class="tablinks" onclick="openCity(event, 'inbox')" style="font-size:20px"><i class="fas fa-inbox"></i>   Inbox</button>
     <button class="tablinks" onclick="openCity(event, 'sent')" style="font-size:20px"><i class="fas fa-paper-plane"></i>   Sent</button>
     <button class="tablinks" onclick="openCity(event, 'contact')" style="font-size:20px"><i class="fas fa-address-book"></i>   Contact List</button>
+    <button class="tablinks" onclick="openCity(event, 'content')" style="font-size:20px"><i class="fas fa-edit"></i>   Content Manager</button>
+    <button class="tablinks" onclick="openCity(event, 'access')" style="font-size:20px"><i class="fas fa-user-lock"></i>   Access Management</button>
     <button class="tablinks" onclick="openCity(event, 'account')" style="font-size:20px"><i class="fas fa-user-circle"></i>   My Account</button>
-    </div>
+    <button class="tablinks" onclick="openCity(event, 'help')" style="font-size:20px"><i class="fas fa-question-circle"></i>   Help</button>
+
+</div>
 
     {{-- dashboard tab --}}
-    <div id="dash" class="tabcontent">
+    <div id="insight" class="tabcontent">
+            <div class="container">
+
+                    <div class="row my-4 mb-4">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">Total Posts</div>
+                                <div class="card-body text-center">
+                                <h1></h1>
+                                <p></p>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-header">Number of Downloaded Posts</div>
+                                    <div class="card-body">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="card-header">Total Post Categories</div>
+                                        <div class="card-body">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+        
+        
+        
+                    <div class="row my-4 mb-4" >
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-header">Total Registered Users</div>
+                                    <div class="card-body">
+            
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="card-header">Unique Visitors</div>
+                                        <div class="card-body">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-sm-4">
+                                        <div class="card">
+                                            <div class="card-header">Top Active Users</div>
+                                            <div class="card-body">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+            
+                </div>
 
     </div>
 
@@ -118,7 +187,7 @@
                         </div>
 
                         <div class="card-footer">
-                            {!!Form::open(['action' => ['DashboardController@destroy', $msg->id], 'method' => 'POST'])!!}
+                            {!!Form::open(['action' => ['AdminDashboardController@destroyMsg', $msg->id], 'method' => 'POST'])!!}
                                 {{Form::hidden('_method', 'DELETE')}}
                                 {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
 
@@ -127,7 +196,7 @@
                                 </button>
                             {!!Form::close()!!}
 
-                            <!-- REPLY MODAL -->
+                            <!-- reply modal -->
                             <div class="modal fade" id="{{$msg->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -139,7 +208,7 @@
                                             </div>
                                             <div class="modal-body">
                                       
-                                              {!! Form::open(['action' => 'DashboardController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                                              {!! Form::open(['action' => 'AdminDashboardController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                                   
                                               <div class="form-group">
                                                   {{Form::label('subject', 'Subject')}}
@@ -230,10 +299,10 @@
 
                         <div class="card-footer">
                            
-                                {!!Form::open(['action' => ['DashboardController@destroy', $sent->id], 'method' => 'POST'])!!}
+                                {{-- {!!Form::open(['action' => ['AdminDashboardController@destroyMsg', $sent->id], 'method' => 'POST'])!!}
                                     {{Form::hidden('_method', 'DELETE')}}
                                     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                {!!Form::close()!!}
+                                {!!Form::close()!!} --}}
 
                         </div>
                     </div>
@@ -282,7 +351,7 @@
                                               </div>
                                               <div class="modal-body">
                                         
-                                                {!! Form::open(['action' => 'DashboardController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                                                {!! Form::open(['action' => 'AdminDashboardController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                                     
                                                 <div class="form-group">
                                                     {{Form::label('subject', 'Subject')}}
@@ -326,21 +395,171 @@
                   
               </div>
 
+    <div id="content" class="tabcontent">
+        <div class="container my-4 mb-4">
+            <div class="row">
+            {{-- add category --}}
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">Add Category</div>
+                    <div class="card-body">
+
+                        {!! Form::open(['action' => 'CategoryController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                        <div class="form-group">
+                                {{Form::label('newCat', 'New Category')}}
+                                {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'New Category', 'required' => 'required'])}}
+                            </div>
+                            {{Form::submit('Add', ['class' => 'btn btn-success float-right'])}}
+                        {!!Form::close()!!}
+
+                    </div>
+
+                </div>
+            </div>
+            {{-- delete category --}}
+            <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">Delete Category</div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Category</td>
+                                        <td></td>
+                                        
+                                        <td class="float-right">Delete</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($category as $cat)
+                                    <tr>
+                                    <td>{{$cat->name}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                            Popover on left
+                                          </button>
+                                        </td>
+                                    
+                                    <td class="float-right">
+                                        {{-- <form action="{{route ('delCat')}}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="float-right btn btn-danger" data-target="{{$cat->id}}" id="{{$cat->id}}">Delete</button>
+                                        </form> --}}
+
+                                        {!!Form::open(['action' => ['CategoryController@destroy', $cat->id], 'method' => 'POST'])!!}
+                                        {{Form::hidden('_method', 'DELETE')}}
+                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                        {!!Form::close()!!}
+                                    </td>
+                                   
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                      
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{{-- Access Managment dash --}}
+<div id="access" class="tabcontent" style="padding-left:10px; padding-right:10px;padding-top:5px">
+<h3 class="text-center">User Applications</h3>
+    <table class="table table-striped">
+        <thead style="font-size:20px">
+            <tr>
+                <strong>
+                <td>Applicant Name</td>
+                <td>Applicant Email</td>
+                <td>Why Join Us?</td>
+                <td>Applied on</td>
+                <td></td>
+                </strong>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if(count($applicants) > 0)
+
+            @foreach($applicants as $applicant)
+            <tr>
+                <td>{{$applicant->name}}</td>
+                <td>{{$applicant->email}}</td>
+                <td>{{$applicant->body}}</td>
+                <td>{{Date('d M, Y', strtotime($applicant->created_at))}}</td>
+                <td>
+                    <button class="btn btn-success" type="button">Accept</button>
+                    <button class="btn btn-danger" type="button">Reject</button>
+                </td>
+            </tr>
+            @endforeach
+
+            @else
+            <h4> There are no user applications at the moment</h4>
+            @endif
+
+        </tbody>
+    </table>
+</div>
+
 {{-- account dash --}}
     <div id="account" class="tabcontent" style="padding-left:10px; padding-right:10px;padding-top:5px">
-        <h2>Your Profile</h2>
-            Name: {{auth()->user()->name}} <br>
-            Joined: {{Date('d M, Y', strtotime(auth()->user()->created_at))}} <br>
-            Role: - <br>
+        <div class="container my-4 mb-4">
+        <div class="card">
+            <div class="card-header">Your Profile</div>
+            <div class="card-body">
+                    <p>Name: {{auth()->user()->name}}</p>  
+                    <p>Joined Since: {{Date('d M, Y', strtotime(auth()->user()->created_at))}}</p>
+                    <p>Role: 
+                        @if(auth()->user()->admin == 1)
+                        Admin
+                        @else
+                        Guest
+                        @endif
+                    </p>
+            </div>
+        </div>
+        
+             
         <hr>
+        
 
-        <h3>Reset Password</h3>
+    
+        <div class="card">
+            <div class="card-header">Reset Password</div>
+            <div class="card-body">
+                <form method="POST" action="{{route ('change')}}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="Current Password">Current Password</label>
+                            <input type="password" id="currentPass" class="form-control" name="currentPass" required>
+                        </div>
 
-        <p>Coming soon. Use the <strong>"forgot password"</strong> option on the log in page to change passwords.</p>
+                        <div class="form-group">
+                            <label for="New Pass">New Password</label>
+                            <input type="password" id="newPass" class="form-control" name="newPass" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Confirm Pass">Confirm Password</label>
+                            <input type="password" id="confirmPass" class="form-control" name="confirmPass" required>
+                        </div>
+
+                        <button class="btn btn-dark" type="submit">Change Password</button>
+                </form>
+            </div>
+        </div>
 
         <br>
         <hr>
     </div>
+</div>
 </div>
 
 {{-- scripts --}}

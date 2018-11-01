@@ -67,14 +67,15 @@ main,
 nav,
 section {
   display: block;
+
    
 }
 
 main{
-  margin-bottom: 20px;
+  padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  min-height: 100%;
+  /* min-height: 100%; */
 }
 
 body {
@@ -86,7 +87,8 @@ body {
   color: #212529;
   text-align: left;
   background-color: #f5f8fa;
-  max-width: 100%;
+  /* max-width: 100%;
+  min-height: 100%; */
 }
 
 [tabindex="-1"]:focus {

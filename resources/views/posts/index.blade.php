@@ -5,10 +5,12 @@
     <div class="row" style="padding-bottom:5px" >
         <div class="col-md-6">
                 Filter by publication:
-                <a href="?category=Baze Panorama">Baze Panorama</a> | 
-                <a href="?category=Focus">Baze Focus</a> | 
-                <a href="?category=Others">Others</a> | 
+                <a href="?category=1">Baze Panorama</a> | 
+                <a href="?category=2">Baze Focus</a> | 
+                <a href="?category=3">Others</a> | 
                 <a href="/posts">Reset</a>
+
+                
         </div>
 
         <div class="col-md-6">
@@ -44,17 +46,25 @@
             <tbody>
                 @foreach($posts as $post)
                 <tr>
-                    <td>
-                        {{$post->cover_image}}
-                        {{-- @if($post->ext == '.pdf')
-                        <i class="fas fa-file-pdf"></i>
-                        @elseif($post->ext == 'jpeg')
-                        <i class="fas fa-image"></i>
-                        @endif --}}
-                       {{-- {{$post->ext}} --}}
+                    <td class="text-center" style="font-size:22px">
+                        
+                        @if(\File::extension($post->cover_image) == 'pdf')
+                        <i class="far fa-file-pdf"></i>
+                        @elseif(\File::extension($post->cover_image) == 'jpeg'|| 'jpg'|| 'png')
+                        <i class="far fa-file-image"></i>
+                        @elseif(\File::extension($post->cover_image) == 'mp4')
+                        <i class="far fa-file-video"></i>
+                        @elseif(\File::extension($post->cover_image) == 'mp3')
+                        <i class="far fa-file-audio"></i>
+                        @endif
+                       
+                                    
                     </td>
-                    <td><h5><a href="/posts/{{$post->id}}">{{$post->title}}</a></h5></td>
-                    <td style="text-align:center">{{$post->category}}</td>
+
+                    <td>
+                        <h5><a href="/posts/{{$post->id}}" style="color:black">{{$post->title}}</a></h5>
+                    </td>
+                    <td style="text-align:center">{{App\Category::find($post->category)['name']}}</td>
                     <td style="text-align:center">
                         @if($post->issn != null)
                             {{$post->issn}}
@@ -72,8 +82,9 @@
         <h4>There are no posts at the moment.</h4> 
     @endif
 
-    <div class="row text-center">
-        {{ $posts->links()}}
+    <div class="row text-center" style="width:100%">
+        {{-- {{ $posts->links()}} --}}
+        {!! $posts->links()!!}
     </div>
         
         

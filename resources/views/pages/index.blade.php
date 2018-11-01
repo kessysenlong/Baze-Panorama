@@ -1,16 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-{{-- <style>
-  /* If the browser window is smaller than 600px, make the columns stack on top of each other */
-@media only screen and (max-width: 600px) {
-    .col { 
-        display: block;
-        width: 100%;
-    }
-}
-
-</style> --}}
+<link href="{{ asset('css/homepage.css') }}" rel="stylesheet">
 
 
 <div class="row">
@@ -23,18 +14,18 @@
       <div class="carousel-inner" style="width:100%">
 
           <div class="carousel-item active">
-            <img class="d-block w-100" src="/storage/bg_images/bookshelf.jpg" alt="First slide" height="550px" style="opacity:0.7">
+            <img class="d-block w-100" src="/storage/bg_images/bookshelf1.jpg" alt="First slide" height="550px">
             <div class="carousel-caption text-white text-left">
-                <h1 style="font-size:60pt">
+                <h1 style="font-size:45pt">
                   <strong>
-                  WELCOME TO THE BAZE <br>
-                  PUBLICATION PORTAL
+                  WELCOME TO BAZE UNIVERSITY'S<br>
+                  PUBLICATIONS PORTAL
                 </strong>
                 </h1>
                 <h5>
                   Explore our expansive offerings ranging from project thesis to our weekly panorama updates on the university.
                 </h5>
-                <a class="btn btn-dark" href="/posts">Apply to publish with us</a>
+                <a class="btn btn-dark" href="/application">Apply to publish with us</a>
             </div>
           </div>
          
@@ -86,12 +77,17 @@
 
 </div>
 
+
  {{-- categories row --}}
+ <div class="container">
  <div class="row text-center" style="padding-top:10px;">
 
-    <div class="col-sm-4 text-white" style="background:black; height:300px; border-bottom:2px solid black">
+    <div class="col-sm-4 zoom text-white" style="background:black; height:300px; border-bottom:2px solid black">
       
       <h2 style="padding-top:25%">POST CATEGORIES</h2>
+      <h5>
+          {{$postcount}} POSTS UPLOADED
+      </h5>
     
     </div>
 
@@ -124,6 +120,7 @@
     </div>
 
   </div>
+</div>
 
 
 @endsection 

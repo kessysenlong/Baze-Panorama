@@ -24,6 +24,11 @@ class PagesController extends Controller //extends core controller, all created 
         $title = 'About Us';
         return view('pages.about')-> with('title', $title);;
     }
+
+    public function application(){
+        $title = 'Apply to publish';
+        return view('pages.application')-> with('title', $title);;
+    }
     public function contact (){
         $title ='Contact Us';
 

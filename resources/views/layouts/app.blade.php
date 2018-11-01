@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Baze Publications') }}</title>
+    <title>Baze Publications Portal</title>
+    {{-- {{ config('app.name', 'Baze Publications') }} --}}
 
     
     <!-- Fonts -->
@@ -17,21 +18,21 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet"> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Advent+Pro|Bad+Script|Chau+Philomene+One|Galada|Nova+Square|Trirong|Ultra|UnifrakturMaguntia" rel="stylesheet">
-    
 
 
 </head>
 <body>
     <div id="app">
         @include('inc.navbar')
-        <main class="py-3 bg-white" style="padding-bottom:20px">
+        <main style="background:white;padding:10px">
             @include('inc.messages')
             @yield('content')
-            {{-- @include('inc.navfooter') --}}
         </main> 
+        {{-- @include('inc.navfooter') --}}
         
     </div>
     

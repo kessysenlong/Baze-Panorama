@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\inbox;
 use App\Post;
@@ -30,14 +31,17 @@ class DashboardController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
-        $postadmin = Post::orderBy('created_at','desc')->paginate(10);
-        $usercount = User::count();
+        $allposts = Post::count();
+        $postcount = Post::where('user_id', $user_id)->count();
+        $postpercentage = $postcount*100/$allposts;
+        // $postadmin = Post::orderBy('created_at','desc')->paginate(10);
+        // $usercount = User::count();
         $userlist = User::orderBy('created_at', 'desc')->get();
         $inbox = inbox::where('to', auth()->user()->id)->get();
         $outbox  = inbox::where('user_id', auth()->user()->id)->get();
        
 
-        return view('dashboard', compact('posts', 'postadmin', $user->posts, 'usercount', 'userlist', 'inbox', 'outbox'));
+        return view('dashboard', compact('posts', $user->posts, 'userlist', 'inbox', 'outbox', 'postcount', 'postpercentage'));
 
         // for posts pagination
         $posts->appends(Request::query())->render();
@@ -72,7 +76,7 @@ class DashboardController extends Controller
         $inbox->to = $request->input('to');
         $inbox->reply_id = $request->input('reply_id');
         $inbox->user_id = auth()->user()->id;
-        $inbox->from = auth()->user()->name; //gets current user id and saves it to from field        
+        $inbox->from = auth()->user()->name;         
         $inbox->save();
 
         return redirect('/dashboard')->with('success', 'Message sent');
@@ -80,10 +84,38 @@ class DashboardController extends Controller
 
     public function reply($id){
         
-        $mybox= inbox::where('to', auth()->user()->id)->get();
-    
+        $mybox= inbox::where('to', auth()->user()->id)->get();  
+    }
+
+
+
+    public function changePword(Request $request){
         
+        $user = auth()->user();
         
+        $currentPass = $request->input('currentPass');
+        $newPass = $request->input('newPass');
+        $confirmPass = $request->input('confirmPass');
+
+        if(Hash::check($currentPass, $user->password)){
+
+            if($newPass == $confirmPass){
+
+                $user->password = Hash::make ($request->input('newPass'));
+                $user->save();
+
+            return redirect('dashboard')->with('success', 'Password updated successfully');
+                
+            }
+            else{
+                return redirect('dashboard')->with('error', 'Your new passwords do not match, try again');
+            }
+
+        }
+
+        else{
+            return redirect('dashboard')->with('error', 'The password you entered does not match our records');
+        }
     }
 
     
@@ -116,6 +148,10 @@ class DashboardController extends Controller
          
         return redirect('/dashboard')->with('success', 'Message Deleted');
     }
+
+
+   
+
 
    
 }
