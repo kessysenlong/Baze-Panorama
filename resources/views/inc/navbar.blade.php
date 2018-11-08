@@ -5,32 +5,21 @@
     top: 0px;
     z-index: 1;
 }
-
-.downdrop {
-    position: relative;
-    display: inline-block;
-}
-
-.downdrop-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-}
-
-.downdrop:hover .downdrop-content {
-    display: block;
-}
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+
+{{-- Light Navbar --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-white" style="box-shadow: 0px 2px 2px 2px #888888; margin-bottom:20px"> 
+
+{{-- Dark Navbar --}}
+{{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0px 2px 2px 2px #888888; margin-bottom:20px">  --}}
+
     <div class="row" style="width:100%">
-        {{-- Left Nav --}}
-        {{--  mr-auto text-left --}}
-        <div class="col-sm-4">
-            <a href="/" class="logo" style="z-index:1;position:absolute;"><img src="/storage/bg_images/logo.png" alt="baze logo"></a>
+    {{-- Left Nav --}}
+        <div class="col-sm-1">
+                <a href="/" class="logo" style="z-index:1;position:absolute;"><img src="/storage/bg_images/logo.png" alt="baze logo"></a>
+        </div>
+        
+        <div class="col-sm-3">
             <a class="navbar-brand float-right" href="{{ url('/') }}" style="font-size:22pt; padding-right:25px; font-family: 'UnifrakturMaguntia', cursive;">
                 Baze Publications Portal
             </a>
@@ -52,6 +41,10 @@
                             <li class="nav-item mr-sm-2 ml-sm-2">
                                 <a class="nav-link" href="/posts">ARCHIVE</a>    
                             </li>
+
+                            <li class="nav-item mr-sm-2 ml-sm-2">
+                                    <a class="nav-link" href="/application">APPLY</a>    
+                                </li>
             
 
                             <li class="nav-item mr-sm-2 ml-sm-2">
@@ -62,39 +55,26 @@
                                 <a class="nav-link" href="/services">CONTACT US</a>    
                             </li>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fas fa-search"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <div class="dropdown-item"> 
-                                        <form class="form-inline" action = "{{ url('/search') }}" method="POST">
-                                            @csrf
-                                            <div class="form-group">
-                                            <input class="form-control is-valid" type="text" name="s" value="{{ isset($s) ?  $s : ''}}" placeholder="Search posts" aria-label="Search" required>
-                                            <button class="btn btn-outline-success my-2 my-sm-0 float-right" type="submit">Search</button>
-                                        </div>
-                                        </form>
-                                    </div> 
-                                </div>
-
-                                {{-- <div class="downdrop" aria-expanded="false">
-                                        <span class="nav-link">
+                        
+                                <li class="nav-item dropdown mr-sm-2 ml-sm-2">
+                                        <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 <i class="fas fa-search"></i>
-                                        </span>
-                                        <div class="downdrop-content">
-                                                <form class="form-inline" action = "{{ url('/search') }}" method="POST">
-                                                    @csrf
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <div class="dropdown-item"> 
                                                     
-                                                    <input class="form-control is-valid" type="text" name="s" value="{{ isset($s) ?  $s : ''}}" placeholder="Search posts" aria-label="Search" required>
-                                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                                </form>
+                                                        <form class="form-inline" action = "{{ url('/search') }}" method="POST">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                            <input class="form-control" type="text" name="s" value="{{ isset($s) ?  $s : ''}}" placeholder="Search posts" aria-label="Search" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <button class="btn success float-right" type="submit">Search</button>
+                                                            </div>
+                                                        </form>
+                                                    </div> 
                                         </div>
-                                      </div>
-                            </li> --}}
-
-                            
-                
+                                    </li>
 
                             
                         <!-- Authentication Links -->

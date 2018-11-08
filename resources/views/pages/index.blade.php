@@ -30,14 +30,7 @@
           </div>
          
       </div>
-          {{-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a> --}}
+         
       </div>
   </div> 
 
@@ -54,7 +47,7 @@
     <div class="col-sm mr-sm-4" style="border:2px solid black">
   
       <h2 style="padding-bottom:5px; padding-top:5px; text-transform:uppercase; font-weight:bold">{{$latestpost->title}}</h2>
-      <h5 style="font-variant:small-caps; color:slategrey">Category: {{$latestpost->category}}</h5>
+      <h5 style="font-variant:small-caps; color:slategrey">Category: {{App\Category::find($latestpost->category)['name']}}</h5>
       <p>Posted on {{Date('d M, Y', strtotime($latestpost->created_at))}} | {{$latestpost->user->name}}</p> 
       {{-- <p>{!!str_limit($latestpost->body, 230)!!}</p> --}}
       <p><a href="/posts/{{$latestpost->id}}" class="btn btn-dark float-left">READ</a></p> 
@@ -95,25 +88,25 @@
 
       <div class="row" style="height:150px">
           <div class="col-sm" style="border:1px solid black;">
-              <h4 style="padding-top:20%"><a href="/posts?category=Baze Panorama" style="color:black">PANORAMA</a></h4>
+              <h4 style="padding-top:20%"><a href="/posts?category=2" style="color:black">PANORAMA</a></h4>
           </div>
           <div class="col-sm" style="border:1px solid black">
-              <h4 style="padding-top:20%">FOCUS</h4>
+              <h4 style="padding-top:20%"><a href="/posts?category=3" style="color:black">FOCUS</a></h4>
           </div>
           <div class="col-sm" style="border:1px solid black">
-              <h4 style="padding-top:20%">SRC</h4>
+              <h4 style="padding-top:20%"><a href="/posts?category=4" style="color:black">SRC</a></h4>
           </div>
       </div>
 
       <div class="row" style="height:150px">
           <div class="col-sm" style="border:1px solid black">
-              <h4 style="padding-top:20%">THESIS</h4>
+              <h4 style="padding-top:20%"><a href="/posts?category=18" style="color:black">FACULTY JOURNALS</a></h4>
           </div>
           <div class="col-sm" style="border:1px solid black">
-              <h4 style="padding-top:20%">ARTICLES</h4>
+              <h4 style="padding-top:20%"><a href="/posts?category=19" style="color:black">ARTICLES</a></h4>
           </div>
           <div class="col-sm" style="border:1px solid black">
-              <h4 style="padding-top:20%">ALUMNI</h4>
+              <h4 style="padding-top:20%"><a href="/posts?category=17" style="color:black">INAUGURAL LECTURES</a></h4>
           </div>
       </div>
 

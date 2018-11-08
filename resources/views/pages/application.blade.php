@@ -10,9 +10,10 @@
                 <div class="card-header"><h3>Apply to publish with us</h3></div>
 
                 <div class="card-body">
-                    <form method="POST" action="ApplicationController@store">
-                        @csrf
+                    
 
+                <form method="POST" action="{{route('apply')}}">
+                        @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Your Name:</label>
 
@@ -26,6 +27,18 @@
                                 @endif
                             </div>
                         </div>
+
+
+                    <div class="form-group row">
+                            <label for="Role" class="col-md-4 col-form-label text-md-right">Your role:</label>
+
+                            <div class="col-md-6">
+                                    <select class="custom-select custom-select-sm" id="role" name="role">
+                                        <option value="staff" selected>Staff</option>
+                                        <option value="student">Student</option>
+                                    </select>
+                            </div>
+                    </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Your Baze Email:</label>
@@ -46,7 +59,7 @@
 
                             <div class="col-md-6">
                                 {{-- <input id="body" type="textarea" class="form-control" name="body" required> --}}
-                                <textarea name="body" id="body" class="form-control" rows="10"></textarea>
+                                <textarea name="body" id="body" class="form-control" rows="10" placeholder="Tell us why you want to publish on this portal."></textarea>
 
                                 @if ($errors->has('body'))
                                     <span class="invalid-feedback" role="alert">

@@ -31,6 +31,7 @@ class PostsController extends Controller
     public function index(Request $request){
         
         $posts = new Post;
+        $category = Category::all();
         // $ext = \File::extension($posts->cover_image);
         // $pst = Post::all()->get(1);
         // $pxt = pathinfo(storage_path().'/storage/cover_images/'. $pst->cover_image, PATHINFO_EXTENSION);
@@ -64,11 +65,9 @@ class PostsController extends Controller
             'sorttitle' => request('sorttitle')
         ]);
        
-        
-        // $ext = pathinfo(storage_path().'/storage/cover_images/'. $posts->cover_image, PATHINFO_EXTENSION);
 
       
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'category'));
         
         $posts->appends(Request::query())->render();
         
@@ -83,7 +82,7 @@ class PostsController extends Controller
     public function create()
     {
         // $categories = Category::orderBy('name', 'asc')->pluck('name');
-        $categories = Category::orderBy('name', 'asc')->pluck('name');
+        $categories = Category::orderBy('name', 'asc')->pluck('name')->get();
 
 
         return view('posts.create')->with('categories', $categories);
@@ -145,11 +144,11 @@ class PostsController extends Controller
     {
         //fetching post id from db
         $post = Post::find($id);
-        Event::fire('posts.view', $post);
+        $cat = $post->category;
+        $relatedposts = Post::all()->where('category', $cat)->take(4);
         
-        return View::make('posts.show')->withPost($post);
-
-        // return view('posts.show')->with('post', $post);
+        return view('posts.show', compact('post', 'relatedposts'));
+      
     }
 
     /**

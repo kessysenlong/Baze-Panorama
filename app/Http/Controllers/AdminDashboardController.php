@@ -25,19 +25,31 @@ class AdminDashboardController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
-        $postadmin = Post::orderBy('created_at','desc')->paginate(10);
+        $postadmin = Post::orderBy('created_at','DESC')->paginate(7);
         $usercount = User::count();
         $userlist = User::orderBy('created_at', 'desc')->get();
         $inbox = inbox::where('to', auth()->user()->id)->get();
+        $read = $inbox->where('is_read', 1);
+        $unread = $inbox->where('is_read', 0);
         $outbox  = inbox::where('user_id', auth()->user()->id)->get();
-        $applicants = Application::orderBy('created_at', 'DESC')->get();
+        $applicants = Application::where('status', 0)->orderBy('created_at', 'DESC')->paginate(2);
+        $applicantscount = $applicants->count();
+        $acceptedapps = Application::where('status', 1)->orderBy('created_at', 'DESC')->get();
+        $rejectedapps = Application::where('status', 2)->orderBy('created_at', 'DESC')->get();
         $category = Category::orderBy('name', 'asc')->get();
+        $catcount = Category::count();
+        $allposts = Post::count();
+        $postcount = Post::where('user_id', $user_id)->count();
+        $postcon = $postcount*100/$allposts;
+        $postpercentage = number_format((float)$postcon, '2', '.', '');
 
 
-        return view('dashboardAdmin', compact('posts', 'postadmin', $user->posts, 'applicants', 'usercount', 'userlist', 'inbox', 'outbox', 'category'));
+        return view('dashboardAdmin', compact('posts', 'postadmin', $user->posts, 'applicantscount','read', 'unread', 'applicants', 'usercount', 'catcount', 'userlist', 'inbox', 'outbox', 'category', 'postcount', 'postpercentage'));
 
         // for posts pagination
         $posts->appends(Request::query())->render();
+        //
+        $applicants->appends(Request::query())->render();
     }
 
     public function create()
@@ -74,11 +86,6 @@ class AdminDashboardController extends Controller
         return redirect('/dashboardAdmin')->with('success', 'Message sent');
     }
 
-    public function addUser($id){
-        
-        
-        
-    }
 
 
     //DELETE USER FROM DB AND SYSTEM

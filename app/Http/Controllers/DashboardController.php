@@ -33,9 +33,8 @@ class DashboardController extends Controller
         $posts = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
         $allposts = Post::count();
         $postcount = Post::where('user_id', $user_id)->count();
-        $postpercentage = $postcount*100/$allposts;
-        // $postadmin = Post::orderBy('created_at','desc')->paginate(10);
-        // $usercount = User::count();
+        $postcon = $postcount*100/$allposts;
+        $postpercentage = number_format((float)$postcon, '2', '.', '');
         $userlist = User::orderBy('created_at', 'desc')->get();
         $inbox = inbox::where('to', auth()->user()->id)->get();
         $outbox  = inbox::where('user_id', auth()->user()->id)->get();

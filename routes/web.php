@@ -1,5 +1,8 @@
 <?php
 
+// use App\Mail\AccountCreated;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +36,6 @@ Route::resource('posts', 'PostsController');
 Route::resource('category', 'CategoryController');
 
 Route::resource('/application', 'ApplicationController');
-
 
 
 // user authentication route
@@ -83,7 +85,31 @@ Route::post('dashboard/change', [
     'as' => 'change.guest'
 ]);
 
+Route::post('application/apply', [
+    'uses' => 'ApplicationController@store',
+    'as' => 'apply'
+]);
 
+Route::post('/dashboardAdmin/adduser', [
+    'uses' => 'UserController@store',
+    'as' => 'adduser'
+]);
+
+Route::post('/dashboardAdmin/reject', [
+    'uses' => 'UserController@reject',
+    'as' => 'reject'
+]);
+
+
+// Route::get('/mail', function () {
+//     // send an email to "batman@batcave.io"
+//     $email = 'kessysenlong@rocketmail.com';
+//     Mail::to($email)->send(new AccountCreated);
+
+//     return redirect('application');
+// });
+
+    
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use App\Inbox;
 
 class DashController extends Controller
 {
@@ -17,4 +18,5 @@ class DashController extends Controller
         
             return redirect('dashboard');
     }
+
 }

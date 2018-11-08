@@ -25,23 +25,28 @@ class ApplicationController extends Controller
 }
 
 public function store(Request $request){
-        $string = '@bazeuniversity.edu.ng';
+
+    $emailstr = $request->input('email');
+    $check = strpos($emailstr, '@bazeuniversity.edu.ng'); 
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required'
+            'email' => 'required|string|email|max:255|unique:application'
         ]);
 
-        if(strpos($request->input('email'), $string) !== false){
+        
+
+        if($check != null){
 
         //create post
         $applicant = new Application;
         $applicant->name = $request->input('name');
         $applicant->email = $request->input('email');
+        $applicant->role = $request->input('role');
         $applicant->body = $request->input('body');
         $applicant->save();
     
-        return redirect('/')->with('success', 'Application Sent Successfully');
+        return redirect('/')->with('success', 'Application Sent Successfully. You will receive our response soon :)');
     }
     return redirect('/application')->with('error', 'Use your Baze email address');
 }

@@ -29,7 +29,8 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    // smtp.mailtrap.io
 
     /*
     |--------------------------------------------------------------------------
@@ -42,8 +43,8 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 2525),
-
+    'port' => env('MAIL_PORT', 587),
+    // 2525
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -56,8 +57,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'dssd@bazeuniversity.edu.ng'),
+        'name' => env('MAIL_FROM_NAME', 'Admin'),
     ],
 
     /*
@@ -72,7 +73,7 @@ return [
     */
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-
+    // tls
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username
@@ -84,9 +85,9 @@ return [
     |
     */
 
-    'username' => env('7759308a7c8ad4'),
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => env('	091e62cde22929'),
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
@@ -119,5 +120,13 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    'stream' => [
+        'ssl' => [
+           'allow_self_signed' => true,
+           'verify_peer' => false,
+           'verify_peer_name' => false,
+        ],
+     ],
 
 ];

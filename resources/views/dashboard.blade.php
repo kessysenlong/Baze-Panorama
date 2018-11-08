@@ -27,7 +27,7 @@
                         <div class="card-header">Total Posts</div>
                         <div class="card-body text-center">
                         <h1>{{$postcount}}</h1>
-                        <p>Posts % on portal: {{$postpercentage}}</p>
+                        <p>Posts contribution on portal: {{$postpercentage}}%</p>
                         </div>
                     </div>
                 </div>
@@ -53,34 +53,7 @@
 
 
 
-            <div class="row my-4 mb-4" >
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-header">Total Registered Users</div>
-                            <div class="card-body">
-    
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-header">Unique Visitors</div>
-                                <div class="card-body">
-                                    
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="col-sm-4">
-                                <div class="card">
-                                    <div class="card-header">Top Active Users</div>
-                                    <div class="card-body">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                </div>
+            
     
         </div>
 
@@ -109,7 +82,7 @@
 
                                 @foreach($posts as $post)
                                 <tr>
-                                <td>{{$post->title}}</td>
+                                <td><a href="/posts/{{$post->id}}">{{$post->title}}</a> </td>
                                 <td>{{Date('d M, Y', strtotime($post->created_at))}}</td>
                                 <td><a href="/posts/{{$post->id}}/edit" class="btn btn-dark float right">Edit</td>
                                 <td style="text-align:center">
@@ -260,57 +233,42 @@
 
     </div>
 
-{{-- Sent/Outbox tab --}}
     <div id="sent" class="tabcontent">
-            @if(count ($outbox) > 0)
-        
-            @foreach($outbox as $sent)
-            <div class="col-sm-md">
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{$sent->id}}" aria-expanded="false" aria-controls="collapseOne">
-                        {{-- <div class="row"> --}}
-                            <div class="col-sm-3 mr-auto">
-                                From: {{$sent->from}}
-                            </div>
 
-                            <div class="col-sm-6 mr-auto">
-                                <h4>{{$sent->subject}}</h4>
-                            </div>
-
-                            <div class="col-sm-3 ml-auto">
-                                    <small>Sent at:</small> {{Date('d M, Y', strtotime($sent->created_at))}}
-                            </div>
-                        {{-- </div> --}}
-                        </button>
-                        </h5>
-                    </div>
+            <h4 class="text-center">Sent messages</h4>
+    
+                @if(count ($outbox) > 0)
             
-                    <div id="{{$sent->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            {{$sent->message}}
+                @foreach($outbox as $sent)
+                <div class="col-sm-md">
+                <div class="accordion" id="accordionExample">
+                    <div class="card" style="padding:10px">
+                        <div class="card-header" id="headingOne">
+                            <div class="row" data-toggle="collapse" data-target="#{{$sent->id}}" aria-expanded="false" aria-controls="collapseOne">
+                            
+                                    
+                                <span style="width:50%">Subject: {{$sent->subject}}</span>
+                                <span style="width:25%">To: {{$sent->to}}</span>
+                                <span style="width:25%">Sent on: {{Date('d M, Y', strtotime($sent->created_at))}}</span>
+                            </div>
                         </div>
-
-                        <div class="card-footer">
-                           
-                                {!!Form::open(['action' => ['DashboardController@destroy', $sent->id], 'method' => 'POST'])!!}
-                                    {{Form::hidden('_method', 'DELETE')}}
-                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                {!!Form::close()!!}
-
+                
+                        <div id="{{$sent->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                {!!$sent->message!!}
+                            </div>
+    
+                            </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
+        @else
+            <h4 class="text-center" style="padding:10px">You have no messages</h3>
+            
+        @endif
             </div>
-        </div>
-            @endforeach
-    @else
-        <h3>You have no messages</h3>
-        
-    @endif
-        </div>
+    
 
 {{-- contact list tab --}}
 <div id="contact" class="tabcontent">
@@ -361,7 +319,7 @@
                                     
                                                 <div class="form-group" hidden="true">
                                                         {{Form::label('to', 'Recepient:')}}
-                                                        {{Form::text('to', $users->id, ['class' => 'form-control'])}}
+                                                        {{Form::text('to', $users->name, ['class' => 'form-control'])}}
                                                     </div>
                                     
                                                 <div class="form-group">

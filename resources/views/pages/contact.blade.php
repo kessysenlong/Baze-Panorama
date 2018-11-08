@@ -1,32 +1,3 @@
-<style>
-            .alert {
-                padding: 20px;
-                background-color: #f44336;
-                color: white;
-                opacity: 1;
-                transition: opacity 0.6s;
-                margin-bottom: 15px;
-            }
-            
-            .alert.success {background-color: #4CAF50;}
-            .alert.info {background-color: #2196F3;}
-            .alert.warning {background-color: #ff9800;}
-            
-            .closebtn {
-                margin-left: 15px;
-                color: white;
-                font-weight: bold;
-                float: right;
-                font-size: 22px;
-                line-height: 20px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-            
-            .closebtn:hover {
-                color: black;
-            }
-            </style>
 
 @extends('layouts.app')
 @section('content')
@@ -38,7 +9,7 @@
                       </div> --}}
 
       <div class="card" style="box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:15px">
-            <div class="card-header text-white" style="background-color:black"><h3>Get in touch</h3></div>
+            <div class="card-header"><h3>Get in touch</h3></div>
             <div class="card-body">
             <div class="row" style="margin-bottom:20px;text-align:center">
             <div class="col-sm">
@@ -49,14 +20,14 @@
 
             <div class="col-sm">
                   <img src="/storage/cover_images/address.png" alt="email">
-                  <p>For the Panorama: dssd@bazeuniversity.edu.ng</p>
+                  <p>For Publications: dssd@bazeuniversity.edu.ng</p>
                   <p>General inquiries: inquiries@bazeuniversity.edu.ng</p>     
             </div>
 
             <div class="col-sm">
                   <img src="/storage/cover_images/conversation.png" alt="social media">
-                  <p>Facebook: Baze Panorama</p>
-                  <p>Twitter:  @Bazepanorama</p>
+                  <p>Facebook: Baze Publications</p>
+                  <p>Twitter:  @Bazepublications</p>
             </div>
 
             </div>

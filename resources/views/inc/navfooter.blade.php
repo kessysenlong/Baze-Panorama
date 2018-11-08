@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-lg navbar-dark text-white bg-dark border-top">
+<div class="navbar navbar-expand-lg navbar-dark text-white bg-dark border-top" style="bottom:0">
             
         <div class="row" style="width:100%; padding-right:15px; padding-left:15px; padding-top:10px">
             <div class="col-sm text-left">
