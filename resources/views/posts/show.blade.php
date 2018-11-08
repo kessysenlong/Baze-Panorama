@@ -74,7 +74,7 @@
 
         @if($post->cover_image != 'noimage.jpg')
 
-            @if(\File::extension($post->cover_image) == ('jpg' || 'jpeg' || 'png'))
+            @if(\File::extension($post->cover_image) == 'jpg' || \File::extension($post->cover_image) == 'jpeg' || \File::extension($post->cover_image) == 'png')
                 <img src="/storage/cover_images/{{$post->cover_image}}" alt="post-image" width="700" height="400">
             @else
                 <iframe frameborder="1" src="/storage/cover_images/{{$post->cover_image}}" width="700" height="600" allowfullscreen webkitallowfullscreen></iframe>

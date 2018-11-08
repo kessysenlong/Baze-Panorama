@@ -45,7 +45,7 @@ th {
 @section('content')
 
 <div class="container">
-        <h3 style="padding-left:0">Publications & Posts</h3>
+        <h3 style="padding-left:0">PUBLICATIONS & POSTS</h3>
 
     {{-- <div class="row" style="padding-bottom:5px" >
         <div class="col ml-auto">

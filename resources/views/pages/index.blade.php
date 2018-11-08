@@ -45,25 +45,30 @@
   <div class="row" style="margin-top:30px">
 
     <div class="col-sm mr-sm-4" style="border:2px solid black">
-  
+  @if($latestpost != null)
       <h2 style="padding-bottom:5px; padding-top:5px; text-transform:uppercase; font-weight:bold">{{$latestpost->title}}</h2>
       <h5 style="font-variant:small-caps; color:slategrey">Category: {{App\Category::find($latestpost->category)['name']}}</h5>
       <p>Posted on {{Date('d M, Y', strtotime($latestpost->created_at))}} | {{$latestpost->user->name}}</p> 
       {{-- <p>{!!str_limit($latestpost->body, 230)!!}</p> --}}
       <p><a href="/posts/{{$latestpost->id}}" class="btn btn-dark float-left">READ</a></p> 
+      @else
+      <h2>No posts yet :(</h2>
+      @endif
   
     </div>
     
     <div class="col-sm mr-sm-4" style="border:2px solid black">
         <h2 style="padding-bottom:5px; padding-top:5px"><strong>Editor's Note</strong></h2>
         <h5>Dr. Jamila Shuara</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pulvinar a leo eu pellentesque. Vivamus dignissim arcu sit amet pharetra lobortis. Integer congue lacinia lorem, ac auctor elit</p> 
+        <p>"Baze University welcomes everyone visiting this publications portal. We have created this platform to keep record of every thought conceived and achievement accomplished in the university."</p> 
       </div>
 
       <div class="col-sm mr-sm-4" style="border:2px solid black">
           <h2 style="padding-bottom:5px; padding-top:5px"><strong>Journals</strong></h2>
           <h5>and other publications</h5>
-          <p></p>
+          <p>> Baze Panorama</p>
+          <p>> Baze Focus</p>
+          <p>> Articles</p>
       </div>
   </div>
   <div class="text-right" style="font-size:15px; padding-top:10px; padding-bottom:25px"><a href="" style="color:black">BROWSE OUR PUBLICATIONS   <i class="fas fa-arrow-right"></i></a></div>
