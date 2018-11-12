@@ -20,10 +20,8 @@
 
             <div class="form-group">
                     {{Form::label('category', 'Category')}}
-                    {{-- {{Form::select('category', array('Baze Panorama'=>'Panorama', 'Baze Focus'=>'Focus', 'Others'=>'Others'), 'Baze Panorama', ['class' => 'form-control'])}} --}}
                     {!! Form::select('category', $categories,  
-                //    
-                    // (['0' => 'Select a Category'] + $categories), 
+
                         null, 
                         ['class' => 'form-control']) !!}
 

@@ -391,41 +391,6 @@
                     </form>
                 </div>
             </div>
-
-        
-
-        {{-- <div class="card  mr-4 ml-4">
-            <div class="card-header"><h3>Reset Password</h3></div>
-                <div class="card-body">
-
-                    {!! Form::open(['action' => 'DashboardController@changePword', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                                    
-                        <div class="form-group">
-                            {{Form::label('currentPass', 'Current Password')}}
-                            {{Form::text('currentPass', '', ['class' => 'form-control'])}}
-                        </div>
-            
-                        <div class="form-group">
-                            {{Form::label('newPass', 'New Password')}}
-                            {{Form::text('newPass', '', ['class' => 'form-control'])}}
-                        </div>
-            
-                        <div class="form-group">
-                            {{Form::label('confirmPass', 'Confirm Password')}}
-                            {{Form::text('confirmPass', '', ['class' => 'form-control'])}}
-                        </div>
-            
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Send</button>
-                        </div>
-    
-                    {!! Form::close() !!}
-
-                   
-                </div>
-            </div> --}}
-    
-
         <br>
         <hr>
     </div>

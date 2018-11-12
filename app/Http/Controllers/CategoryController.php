@@ -26,10 +26,6 @@ class CategoryController extends Controller
         'name.unique' => 'Category already exists'
     ]);
 
-        // if($validator->fails()){
-        //     return redirect('dashboardAdmin')->with('error', 'Category already exists');
-        // }
-
         $category = new Category;
         $category->name = $request->input('name');
         $category->user_id = auth()->user()->id;

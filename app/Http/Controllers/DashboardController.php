@@ -50,14 +50,6 @@ class DashboardController extends Controller
     public function create()
     {
 
-        // $userMsg = User::pluck('name', 'id');
-        // return view('/dashboard', compact('id', 'userMsg'));
-        // if(count(error) > 0){
-        //     return redirect('/dashboard')->with('error', 'There seems to be an error with your message, try again');
-
-        // }
-        // return redirect('/dashboard')->with('Success', 'Message sent');
-
     }
 
     public function store(Request $request)
@@ -131,10 +123,8 @@ class DashboardController extends Controller
         //allowing logged in user (Admin) delete other users
         if(auth()->user()->id != $user->id){
             $user->delete();
-            //User::delete($user->id);
+            
         }
-
-        //$user->delete();
         return redirect('/dashboard')->with('success', 'User Removed');
     }
 
@@ -143,8 +133,7 @@ class DashboardController extends Controller
         $outbox = $inbox;
 
         $inbox->delete();
-        
-         
+    
         return redirect('/dashboard')->with('success', 'Message Deleted');
     }
 

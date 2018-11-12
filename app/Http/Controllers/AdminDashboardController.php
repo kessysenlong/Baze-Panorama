@@ -40,7 +40,7 @@ class AdminDashboardController extends Controller
         $catcount = Category::count();
         $allposts = Post::count();
         $postcount = Post::where('user_id', $user_id)->count();
-        $postcon = $postcount*100/$allposts;
+        $postcon = $postcount*100;
         $postpercentage = number_format((float)$postcon, '2', '.', '');
 
 
@@ -54,14 +54,6 @@ class AdminDashboardController extends Controller
 
     public function create()
     {
-
-        // $userMsg = User::pluck('name', 'id');
-        // return view('/dashboard', compact('id', 'userMsg'));
-        // if(count(error) > 0){
-        //     return redirect('/dashboard')->with('error', 'There seems to be an error with your message, try again');
-
-        // }
-        // return redirect('/dashboard')->with('Success', 'Message sent');
 
     }
 

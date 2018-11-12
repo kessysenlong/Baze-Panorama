@@ -40,8 +40,6 @@ class UserController extends Controller
         Mail::to($email)->send(new AccountCreated);
 
         return redirect('dashboardAdmin')->with('success', 'New user created');
-    // }
-    // return redirect('dashboardAdmin')->with('error', 'The system cannot register this user');
     }
 
     public function reject(Request $request){

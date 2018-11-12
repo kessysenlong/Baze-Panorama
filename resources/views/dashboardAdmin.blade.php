@@ -46,7 +46,10 @@
                                 <div class="card-header">Total Posts</div>
                                 <div class="card-body text-center">
                                 <h1>{{$postcount}}</h1>
+                                
                                 <p>Posts contribution on portal: {{$postpercentage}}%</p>
+                               
+                                
                                 </div>
                             </div>
                         </div>

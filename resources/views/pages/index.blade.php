@@ -41,7 +41,7 @@
 
  <div class="container" style="margin-top:40px">
    {{-- latest posts row --}}
-   <h3>LATEST PUBLICATIONS</h3>   
+   <h3>LATEST PUBLICATIONS   <i class="fas fa-angle-double-down" style="font-size:23px"></i></h3>   
   <div class="row" style="margin-top:30px">
 
     <div class="col-sm mr-sm-4" style="border:2px solid black">
@@ -60,18 +60,18 @@
     <div class="col-sm mr-sm-4" style="border:2px solid black">
         <h2 style="padding-bottom:5px; padding-top:5px"><strong>Editor's Note</strong></h2>
         <h5>Dr. Jamila Shuara</h5>
-        <p>"Baze University welcomes everyone visiting this publications portal. We have created this platform to keep record of every thought conceived and achievement accomplished in the university."</p> 
-      </div>
+        <p>Baze university welcomes and invites all to the publications portal!</p>      
+    </div>
 
       <div class="col-sm mr-sm-4" style="border:2px solid black">
           <h2 style="padding-bottom:5px; padding-top:5px"><strong>Journals</strong></h2>
-          <h5>and other publications</h5>
-          <p>> Baze Panorama</p>
-          <p>> Baze Focus</p>
-          <p>> Articles</p>
+          <p>Our main publications are </p>
+          <p> - Baze Panorama</p>
+          <p> - Baze Focus</p>
+          <p>Other journals can be found on our <a href="/posts">archive page.</a>  Recommendations should be made to dssd@bazeuniversity.edu.ng</p>
       </div>
   </div>
-  <div class="text-right" style="font-size:15px; padding-top:10px; padding-bottom:25px"><a href="" style="color:black">BROWSE OUR PUBLICATIONS   <i class="fas fa-arrow-right"></i></a></div>
+  <div class="text-right" style="font-size:15px; padding-top:10px; padding-bottom:25px"><a href="/posts" style="color:black">BROWSE OUR PUBLICATIONS   <i class="fas fa-arrow-right"></i></a></div>
 
 </div>
 

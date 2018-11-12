@@ -32,9 +32,6 @@ class PostsController extends Controller
         
         $posts = new Post;
         $category = Category::all();
-        // $ext = \File::extension($posts->cover_image);
-        // $pst = Post::all()->get(1);
-        // $pxt = pathinfo(storage_path().'/storage/cover_images/'. $pst->cover_image, PATHINFO_EXTENSION);
                 
         
 
@@ -81,8 +78,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        // $categories = Category::orderBy('name', 'asc')->pluck('name');
-        $categories = Category::orderBy('name', 'asc')->pluck('name')->get();
+        $categories = Category::orderBy('name', 'asc')->pluck('name');
 
 
         return view('posts.create')->with('categories', $categories);
@@ -235,14 +231,4 @@ class PostsController extends Controller
         $post->delete();
         return redirect('/posts')->with('success', 'Post Removed');
     }
-
-    // public function getCategories($id){
-    //     $categories = Category::orderBy('name', 'asc')->get();
-    //     $options = array();
-
-    //     foreach($categories as $category){
-    //         $options += array($category->id => $category->name);
-    //     }
-    //     return view('posts.create')->with($options, 'options')
-    // }
 }

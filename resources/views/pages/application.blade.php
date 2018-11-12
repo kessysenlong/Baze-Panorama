@@ -58,7 +58,6 @@
                             <label for="body" class="col-md-4 col-form-label text-md-right">Why publish with us?</label>
 
                             <div class="col-md-6">
-                                {{-- <input id="body" type="textarea" class="form-control" name="body" required> --}}
                                 <textarea name="body" id="body" class="form-control" rows="10" placeholder="Tell us why you want to publish on this portal."></textarea>
 
                                 @if ($errors->has('body'))

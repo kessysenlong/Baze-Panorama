@@ -27,7 +27,7 @@ Route::get('/', 'PagesController@index');
 
 Route::get('/about', 'PagesController@about');
 
-Route::get('/services', 'PagesController@contact');
+Route::get('/contact', 'PagesController@contact');
 
 Route::post ('/search', 'SearchController@index');
 
@@ -99,15 +99,6 @@ Route::post('/dashboardAdmin/reject', [
     'uses' => 'UserController@reject',
     'as' => 'reject'
 ]);
-
-
-// Route::get('/mail', function () {
-//     // send an email to "batman@batcave.io"
-//     $email = 'kessysenlong@rocketmail.com';
-//     Mail::to($email)->send(new AccountCreated);
-
-//     return redirect('application');
-// });
 
     
 

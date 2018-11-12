@@ -18,7 +18,6 @@ class PagesController extends Controller //extends core controller, all created 
         
        
         return view ('pages.index', compact('title', 'latestpost', 'posts', 'postcount')); 
-        //return view ('pages.index') -> with('title', $title); //this can be achieved using either this method or the one above
     }
     public function about(){
         $title = 'About Us';
@@ -32,7 +31,6 @@ class PagesController extends Controller //extends core controller, all created 
     public function contact (){
         $title ='Contact Us';
 
-        //return view ('pages.contact')-> with( 'title', $title);//return page with appended array data
         return view ('pages.contact');
     }
     public function search(){

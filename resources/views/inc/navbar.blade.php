@@ -8,10 +8,10 @@
 </style>
 
 {{-- Light Navbar --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-white" style="box-shadow: 0px 2px 2px 2px #888888; margin-bottom:20px"> 
+{{-- <nav class="navbar navbar-expand-lg navbar-light bg-white" style="box-shadow: 0px 2px 2px 2px #888888; margin-bottom:20px">  --}}
 
 {{-- Dark Navbar --}}
-{{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0px 2px 2px 2px #888888; margin-bottom:20px">  --}}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0px 2px 2px 2px #888888; margin-bottom:20px"> 
 
     <div class="row" style="width:100%">
     {{-- Left Nav --}}
@@ -52,7 +52,7 @@
                             </li>
 
                             <li class="nav-item mr-sm-2 ml-sm-2">
-                                <a class="nav-link" href="/services">CONTACT US</a>    
+                                <a class="nav-link" href="/contact">CONTACT US</a>    
                             </li>
 
                         
