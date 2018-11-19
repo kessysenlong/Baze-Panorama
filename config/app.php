@@ -149,7 +149,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
         
-        // Goodnesskay\LaravelPdfViewer\LaravelPdfViewerServiceProvider::class,
        
         /*
          * Package Service Providers...
